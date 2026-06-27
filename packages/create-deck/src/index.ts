@@ -237,10 +237,15 @@ async function scaffoldProject(options: Required<CliOptions>) {
   s.start(`Scaffolding ${options.projectName}`)
   await cp(templateDir, targetDir, {
     filter(source) {
+      // Compare against the path *relative to the template root* so install
+      // locations that themselves live under node_modules (npm create / npx)
+      // don't cause every file to be filtered out.
+      const rel = relative(templateDir, source)
+      const segments = rel.split(/[\\/]/)
       return (
         !source.endsWith('.DS_Store') &&
-        !source.includes('node_modules') &&
-        !source.includes('.turbo')
+        !segments.includes('node_modules') &&
+        !segments.includes('.turbo')
       )
     },
     recursive: true,
