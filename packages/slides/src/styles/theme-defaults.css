@@ -1,0 +1,177 @@
+/* =============================================================================
+   @atom63/slides — STANDALONE DEFAULT TOKENS
+
+   Self-contained default values for every theme/palette/contract custom
+   property the slide player reads. Import this ONCE in a standalone consumer
+   (one that does NOT ship the @atom63 design-token CSS) so the player renders
+   correctly out of the box:
+
+       import "@atom63/slides/theme-defaults";
+       import "@atom63/slides/styles";
+
+   These are ADDITIVE, low-specificity `:root` defaults. A host that ships its
+   own design tokens (like os63, which imports @atom63/tokens) defines the same
+   properties later in the cascade and therefore overrides everything here — so
+   importing this file in such a host is a harmless no-op. os63 does NOT import
+   it.
+
+   Values mirror the Modern (default-theme, light-mode) look from
+   @atom63/tokens (primitives/aliases/semantics/radius/effects/components/
+   slide-surfaces). Every var() used as a value below resolves to another token
+   defined IN this file, except Tailwind-provided primitives (--spacing, --tw-*,
+   --color-*) which the consumer's Tailwind build supplies.
+   ============================================================================= */
+
+:root {
+  /* ── Fonts ──────────────────────────────────────────────────────────── */
+  --font-serif: "Brawler", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono:
+    "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+
+  /* ── Z-layers (subset the slide player uses) ────────────────────────── */
+  --z-layer-below: -1;
+  --z-layer-default: 0;
+  --z-layer-base: 10;
+  --z-layer-sticky: 20;
+  --z-layer-tooltip: 980;
+
+  /* ── Radius scale ───────────────────────────────────────────────────────
+     Same formula as @atom63/tokens so a host that later sets --corner-radius /
+     --radius-multiplier reshapes these identically. Concrete leaves below. */
+  --corner-radius: 10px;
+  --radius-multiplier: 1;
+  --radius-md: calc(var(--corner-radius) * 0.8 * var(--radius-multiplier));
+  --radius-lg: calc(var(--corner-radius) * var(--radius-multiplier));
+  --radius-xl: calc(var(--corner-radius) * 1.4 * var(--radius-multiplier));
+  --radius-3xl: calc(var(--corner-radius) * 2.2 * var(--radius-multiplier));
+  /* --radius-sm is referenced transitively by --theme-selection-radius. */
+  --radius-sm: calc(var(--corner-radius) * 0.6 * var(--radius-multiplier));
+
+  /* ── Base palette / semantic colors (Modern theme, light mode) ──────────
+     Concrete leaves copied from the resolved @atom63/tokens chain
+     (semantics.css → aliases.css → primitives.css, light values). */
+  --background: rgba(249, 249, 249, 1);
+  --foreground: rgba(32, 32, 32, 1);
+  --card: rgba(252, 252, 252, 1);
+  --popover: rgba(252, 252, 252, 1);
+  --popover-foreground: rgba(32, 32, 32, 1);
+  --light: rgba(252, 252, 252, 1);
+  --dark: rgba(17, 17, 17, 1);
+  --muted: rgba(240, 240, 240, 1);
+  --muted-foreground: rgba(100, 100, 100, 1);
+  --secondary: rgba(240, 240, 240, 1);
+  --secondary-foreground: rgba(100, 100, 100, 1);
+  --border: rgba(232, 232, 232, 1);
+  --input: rgba(224, 224, 224, 1);
+  --ring: rgba(217, 217, 217, 1);
+  --accent: color-mix(in srgb, rgba(232, 232, 232, 1), transparent 20%);
+  --accent-foreground: rgba(32, 32, 32, 1);
+  --primary: rgba(44, 127, 255, 1);
+  --primary-foreground: rgba(239, 252, 255, 1);
+  --destructive: rgba(231, 67, 64, 1);
+
+  /* ── Shared border / shadow effect leaves (from effects.css) ─────────────
+     Internal helpers the chrome contract references; not consumed directly by
+     slides but needed so the contract tokens below resolve in-file. */
+  --theme-border-width: 1px;
+  --theme-border-style: solid;
+  --effect-shadow-xs: 0px 1px 2px 0px rgb(0 0 0 / 0.05), 0px 2px 4px -2px rgb(0 0 0 / 0.08);
+  --effect-shadow-sm: 0px 2px 4px -1px rgb(0 0 0 / 0.06), 0px 6px 10px -4px rgb(0 0 0 / 0.08);
+  --effect-shadow-md: 0px 4px 8px -2px rgb(0 0 0 / 0.06), 0px 12px 18px -8px rgb(0 0 0 / 0.09);
+
+  /* ── Slide theme contract (verbatim from tokens/slide-surfaces.css) ─── */
+  --theme-slide-bg: var(--background);
+  --theme-slide-stage-bg: color-mix(in oklch, var(--muted) 70%, var(--border) 30%);
+  --theme-slide-stage-slide-ring: rgba(0, 0, 0, 0.08);
+  --theme-slide-toolbar-bg: color-mix(in oklch, var(--muted) 38%, transparent);
+  --theme-slide-toolbar-border: color-mix(in oklch, var(--border) 64%, transparent);
+  --theme-slide-statusbar-bg: color-mix(in oklch, var(--muted) 20%, transparent);
+  --theme-slide-statusbar-border: color-mix(in oklch, var(--border) 50%, transparent);
+  --theme-slide-sidebar-bg: color-mix(in oklch, var(--muted) 30%, transparent);
+  --theme-slide-sidebar-border: color-mix(in oklch, var(--border) 50%, transparent);
+  --theme-slide-surface: var(--card);
+  --theme-slide-rule-color: color-mix(in oklch, var(--foreground) 25%, transparent);
+  --theme-slide-rule-width: 1px;
+  --theme-slide-accent: var(--primary);
+  --theme-slide-accent-foreground: var(--primary-foreground);
+  --theme-slide-muted: var(--muted-foreground);
+  --theme-slide-code-bg: var(--card);
+  --theme-slide-code-border: color-mix(in oklch, var(--foreground) 10%, transparent);
+  --theme-slide-quote-color: color-mix(in oklch, var(--foreground) 90%, transparent);
+
+  /* ── Control / overlay / focus contract (from effects.css) ──────────── */
+  --theme-control-border-width: var(--theme-border-width);
+  --theme-control-border-style: var(--theme-border-style);
+  --theme-control-active-border-style: var(--theme-control-border-style);
+  --theme-control-shadow: none;
+  --theme-overlay-border-width: var(--theme-border-width);
+  --theme-overlay-border-style: var(--theme-border-style);
+  --theme-overlay-shadow: var(--effect-shadow-md);
+  --theme-focus-outline-width: 0px;
+  --theme-focus-outline-offset: 0px;
+  --theme-focus-outline-color: var(--ring);
+  --theme-focus-shadow: none;
+  --theme-selection-border-width: var(--theme-border-width);
+  --theme-selection-border-style: var(--theme-border-style);
+  --theme-selection-radius: var(--radius-sm);
+
+  /* ── Switch contract (from effects.css) ─────────────────────────────── */
+  --theme-switch-track-shadow: inset 0 1px rgb(0 0 0 / 0.06);
+  --theme-switch-thumb-border-width: 0px;
+  --theme-switch-thumb-border-style: var(--theme-border-style);
+  --theme-switch-thumb-shadow: var(--effect-shadow-sm);
+
+  /* ── Tabs contract (from effects.css) ───────────────────────────────── */
+  --theme-tabs-list-border-color: transparent;
+  --theme-tabs-list-border-width: 0px;
+  --theme-tabs-list-border-style: var(--theme-border-style);
+  --theme-tabs-list-shadow: none;
+  --theme-tabs-active-border-width: 0px;
+  --theme-tabs-active-border-style: var(--theme-border-style);
+  --theme-tabs-active-background: var(--card);
+  --theme-tabs-active-background-color: transparent;
+  --theme-tabs-active-shadow: var(--effect-shadow-sm);
+
+  /* ── Segment-control contract (from effects.css) ────────────────────── */
+  --theme-segment-list-background: color-mix(in oklch, var(--muted) 64%, transparent);
+  --theme-segment-list-border-color: color-mix(in oklch, var(--border) 80%, transparent);
+  --theme-segment-list-shadow: var(--theme-tabs-list-shadow);
+  --theme-segment-item-text-shadow: none;
+  --theme-segment-item-hover-background: transparent;
+  --theme-segment-active-background: var(--theme-tabs-active-background);
+  --theme-segment-active-background-color: var(--theme-tabs-active-background-color);
+  --theme-segment-active-border-color: transparent;
+  --theme-segment-active-text-shadow: none;
+  --theme-segment-active-shadow: var(--theme-tabs-active-shadow);
+  --theme-segment-active-icon-filter: none;
+
+  /* ── Button-group contract (from effects.css + components.css) ──────────
+     --theme-button-group-text-* mirror the slide-side inline fallbacks
+     (--muted / --input / --foreground) so the default look is faithful. */
+  --theme-button-group-radius: var(--radius-lg);
+  --theme-button-group-background: color-mix(in oklch, var(--muted) 72%, transparent);
+  --theme-button-group-border-color: color-mix(in oklch, var(--border) 82%, var(--foreground) 8%);
+  --theme-button-group-border-width: 0px;
+  --theme-button-group-separator-color: color-mix(
+    in oklch,
+    var(--border) 82%,
+    var(--foreground) 8%
+  );
+  --theme-button-group-shadow: none;
+  --theme-button-group-text-background: var(--muted);
+  --theme-button-group-text-border-color: var(--input);
+  --theme-button-group-text-foreground: var(--foreground);
+
+  /* ── Button contract (base button, from components.css) ─────────────── */
+  --theme-button-background: var(--secondary);
+  --theme-button-foreground: var(--secondary-foreground);
+  --theme-button-border-color: transparent;
+  --theme-button-hover-background: color-mix(in oklch, var(--secondary) 90%, transparent);
+  --theme-button-hover-border-color: transparent;
+  --theme-button-active-background: color-mix(in oklch, var(--secondary) 80%, transparent);
+  --theme-button-active-border-color: transparent;
+  --theme-button-shadow: var(--theme-control-shadow);
+  --theme-button-text-shadow: none;
+  --theme-button-icon-filter: none;
+}

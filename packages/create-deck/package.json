@@ -1,0 +1,41 @@
+{
+  "name": "@atom63/create-deck",
+  "version": "0.1.0",
+  "license": "MIT",
+  "type": "module",
+  "description": "Scaffold a standalone deck project powered by the @atom63/slides engine",
+  "bin": {
+    "create-deck": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "templates"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "lint": "biome check .",
+    "smoke": "pnpm build && node scripts/smoke-test.mjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@clack/prompts": "^0.11.0"
+  },
+  "devDependencies": {
+    "@atom63/biome-config": "workspace:*",
+    "@atom63/tsconfig": "workspace:*",
+    "@biomejs/biome": "2.4.6",
+    "@types/node": "^24.5.1",
+    "tsup": "^8.3.5",
+    "typescript": "~5.8.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/atom63/slides.git",
+    "directory": "packages/create-deck"
+  },
+  "homepage": "https://github.com/atom63/slides/tree/main/packages/create-deck#readme"
+}

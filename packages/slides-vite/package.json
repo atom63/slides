@@ -1,0 +1,64 @@
+{
+  "name": "@atom63/slides-vite",
+  "version": "0.1.0",
+  "license": "MIT",
+  "description": "Vite plugins for @atom63/slides decks — MDX frontmatter manifest + ?raw virtual module.",
+  "keywords": [
+    "vite",
+    "vite-plugin",
+    "mdx",
+    "slides",
+    "presentation",
+    "frontmatter",
+    "manifest",
+    "gray-matter"
+  ],
+  "homepage": "https://github.com/atom63/slides/tree/main/packages/slides-vite#readme",
+  "bugs": {
+    "url": "https://github.com/atom63/slides/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/atom63/slides.git",
+    "directory": "packages/slides-vite"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "typescript": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "lint": "biome check .",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.3"
+  },
+  "peerDependencies": {
+    "vite": "^5 || ^6 || ^7"
+  },
+  "devDependencies": {
+    "@atom63/biome-config": "workspace:*",
+    "@atom63/tsconfig": "workspace:*",
+    "@biomejs/biome": "2.4.6",
+    "@types/node": "^22.10.0",
+    "tsup": "^8.3.5",
+    "typescript": "~5.8.3",
+    "vite": "^7.1.5"
+  }
+}

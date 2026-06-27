@@ -1,0 +1,38 @@
+{
+  "name": "@atom63/slides-skill",
+  "version": "0.1.0",
+  "description": "Distributable AI-agent skill for authoring Swiss-design presentation decks with the standalone @atom63/slides engine.",
+  "license": "MIT",
+  "private": false,
+  "keywords": [
+    "slides",
+    "presentation",
+    "deck",
+    "mdx",
+    "agent-skill",
+    "ai",
+    "claude",
+    "atom63"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/atom63/slides.git",
+    "directory": "packages/slides-skill"
+  },
+  "files": [
+    "SKILL.md",
+    "TEMPLATES.md",
+    "scripts"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "gen": "node scripts/gen-templates.mjs"
+  },
+  "devDependencies": {
+    "@atom63/biome-config": "workspace:*",
+    "@atom63/slides": "workspace:*"
+  },
+  "homepage": "https://github.com/atom63/slides/tree/main/packages/slides-skill#readme"
+}

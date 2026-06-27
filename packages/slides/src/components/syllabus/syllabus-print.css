@@ -1,0 +1,103 @@
+/*
+ * Styles for the syllabus reading layout and print pipeline.
+ *
+ * The slide-primitive CSS reset that previously lived here is no longer needed.
+ * Markdown inside <Syllabus> now renders with native HTML elements styled by
+ * mdxStyles tokens via SyllabusContentContext — no !important overrides required.
+ *
+ * Only the meta block (definition-list layout) and print pipeline remain.
+ */
+
+/* ──────── Link interactivity ──────── */
+
+/* Hover color is driven by JS (onClonedAnchorEnter/Leave in syllabus-view.tsx)
+ * because CSS :hover is suppressed on DOM-cloned nodes inside the presentation view. */
+.syllabus-prose a {
+  cursor: pointer;
+}
+
+/* ──────── Meta block: definition-list style ──────── */
+
+.syllabus-prose [data-syllabus-block="meta"] {
+  padding: 0;
+  border: 0;
+}
+.syllabus-prose [data-syllabus-block="meta"] > div {
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 40%, transparent);
+}
+.syllabus-prose [data-syllabus-block="meta"] > div:last-child {
+  border-bottom: 0;
+}
+.syllabus-prose [data-syllabus-block="meta"] [data-syllabus-meta-label] {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.6875rem;
+  color: var(--muted-foreground);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.syllabus-prose [data-syllabus-block="meta"] [data-syllabus-meta-value] {
+  font-family: var(--font-serif, ui-serif, Georgia, serif);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--foreground);
+}
+
+/* ──────── Print styles ──────── */
+
+/* Print pipeline (see syllabus-view.tsx):
+ *
+ *   On `beforeprint` we clone the article into <body id="syllabus-print-clone">
+ *   and hide every other body child with `display:none !important`. That
+ *   bypasses the presentation overlay's transform / position-absolute stack which
+ *   otherwise breaks paginated layout. */
+
+@media print {
+  /* The html/body/#root page-level resets are applied as inline styles by the
+     syllabus print handler (syllabus-view.tsx beforePrint), only during an
+     actual syllabus print. A global rule here would also fire during another
+     app's print (e.g. the resume) whenever slides is merely open, so it is
+     intentionally omitted to avoid leaking across apps. */
+
+  #syllabus-print-clone {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    max-width: none;
+    padding: 0.6in 0.7in;
+    margin: 0;
+    color: black;
+    background: white;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+
+  #syllabus-print-clone .syllabus-prose h1,
+  #syllabus-print-clone .syllabus-prose h2,
+  #syllabus-print-clone .syllabus-prose h3,
+  #syllabus-print-clone .syllabus-prose h4,
+  #syllabus-print-clone .syllabus-prose h5,
+  #syllabus-print-clone .syllabus-prose h6 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  #syllabus-print-clone a {
+    color: black;
+    text-decoration-color: #999;
+  }
+
+  #syllabus-print-clone > header {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    border-top-color: black;
+  }
+
+  @page {
+    size: letter;
+    margin: 0;
+  }
+}

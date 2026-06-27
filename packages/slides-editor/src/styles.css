@@ -1,0 +1,206 @@
+/* @atom63/slides-editor — minimal editor chrome.
+ *
+ * Layout only: a two-pane split (preview | source) with a sized preview area
+ * (SlidesPlayer needs an explicit height). Visual theming of the slides
+ * themselves comes from @atom63/slides ("/styles" + "/theme-defaults"), imported
+ * by the host app — NOT here.
+ */
+
+.a63-editor {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.85fr);
+  gap: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  font-family:
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+@media (max-width: 880px) {
+  .a63-editor {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(240px, 1fr) minmax(0, 1fr);
+  }
+}
+
+/* Preview pane — must give SlidesPlayer a sized container. */
+.a63-editor__preview {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  border-right: 1px solid rgba(127, 127, 127, 0.18);
+}
+
+.a63-editor__preview-stage {
+  position: absolute;
+  inset: 0;
+}
+
+.a63-editor__preview-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 2rem;
+  text-align: center;
+  font-size: 0.875rem;
+  opacity: 0.6;
+}
+
+/* Error banner — non-blocking; overlays the top of the preview. */
+.a63-editor__error {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+  padding: 0.5rem 0.75rem;
+  background: #b91c1c;
+  color: #fff;
+  font-size: 0.78rem;
+  line-height: 1.35;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.a63-editor__error-tag {
+  flex: none;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.a63-editor__error-msg {
+  flex: 1;
+  min-width: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Source pane. */
+.a63-editor__source {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  background: #f6f6f7;
+  color: #1a1a1a;
+}
+
+.a63-editor__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid rgba(127, 127, 127, 0.18);
+  flex: none;
+}
+
+.a63-editor__title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.a63-editor__theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.6rem;
+  border: 1px solid rgba(127, 127, 127, 0.4);
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.a63-editor__theme-toggle:hover {
+  background: rgba(127, 127, 127, 0.12);
+}
+
+.a63-editor__textarea {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  resize: none;
+  border: 0;
+  padding: 0.75rem;
+  background: transparent;
+  color: inherit;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.8rem;
+  line-height: 1.55;
+  tab-size: 2;
+  outline: none;
+}
+
+/* Template palette. */
+.a63-editor__palette {
+  flex: none;
+  max-height: 38%;
+  overflow-y: auto;
+  border-top: 1px solid rgba(127, 127, 127, 0.18);
+  padding: 0.5rem 0.75rem 0.75rem;
+}
+
+.a63-editor__palette-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.55;
+  margin-bottom: 0.5rem;
+}
+
+.a63-editor__palette-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.4rem;
+}
+
+.a63-editor__chip {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.1rem;
+  padding: 0.4rem 0.55rem;
+  border: 1px solid rgba(127, 127, 127, 0.3);
+  border-radius: 0.5rem;
+  background: #fff;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 0.12s ease,
+    transform 0.12s ease;
+}
+
+.a63-editor__chip:hover {
+  border-color: rgba(59, 130, 246, 0.8);
+  transform: translateY(-1px);
+}
+
+.a63-editor__chip-name {
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.a63-editor__chip-meta {
+  font-size: 0.62rem;
+  opacity: 0.55;
+}
+
+.a63-editor__footnote {
+  margin-top: 0.6rem;
+  font-size: 0.62rem;
+  opacity: 0.5;
+  line-height: 1.4;
+}

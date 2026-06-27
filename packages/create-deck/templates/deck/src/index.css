@@ -1,0 +1,5 @@
+@import "tailwindcss";
+/* Scan the engine's built classes so Tailwind generates the utilities the
+   @atom63/slides templates rely on. */
+@source "../node_modules/@atom63/slides/dist/**/*.js";
+html, body, #root { height: 100%; margin: 0; }

@@ -1,0 +1,5 @@
+export type { CompileDeckResult } from './compile-deck'
+export { compileDeck, stripImports } from './compile-deck'
+export type { DeckEditorProps } from './deck-editor'
+export { DeckEditor } from './deck-editor'
+export { synthExample, templateSnippets, toInsertSnippet } from './template-snippets'

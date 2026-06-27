@@ -1,0 +1,53 @@
+---
+title: Standalone Slides Engine
+date: 2026-06-26
+description: A reference deck proving @atom63/slides renders with no host design system.
+---
+
+import { CoverSlide, StatementSlide, StatBento, ClosingSlide } from '@atom63/slides'
+
+<CoverSlide
+  title="Standalone Slides Engine"
+  subtitle="Rendering @atom63/slides like an external open-source consumer would."
+  eyebrow="2026"
+  credit="@atom63/deck-starter"
+/>
+
+---
+
+<StatementSlide
+  kicker="The point"
+  title="The engine ships its own default theme."
+  subtitle="No @atom63/tokens, no os63 — just the published package and its theme-defaults."
+/>
+
+---
+
+<StatBento label="Why this matters" title="Decoupling, by the numbers">
+  <StatBento.Body>
+    A consumer pulls in one workspace package and gets a complete
+    presentation runtime: layouts, prose styling, and reveal animations.
+  </StatBento.Body>
+  <StatBento.Stat value="1" label="package imported" />
+  <StatBento.Stat value="0" label="design-system deps" />
+  <StatBento.Stat value="2" label="CSS entrypoints" />
+</StatBento>
+
+---
+
+## Bare markdown also works
+
+The vendored MDX prose surface styles plain markdown too — no template needed:
+
+- A bullet list rendered by the engine's `slideMdxComponents`
+- An inline `code` span to exercise the `InlineCode` mapping
+- Mixed content sitting inside a slide layout
+
+---
+
+<ClosingSlide
+  title="Thanks"
+  eyebrow="Q&A"
+  website="atom63.io"
+  email="hi@atom63.io"
+/>

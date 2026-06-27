@@ -1,0 +1,76 @@
+name: Release slides toolchain (public npm)
+
+# Publishes the open-source slides toolchain to the PUBLIC npm registry
+# (registry.npmjs.org) under the @atom63 scope. This is intentionally separate
+# from `publish.yml`, which targets GitHub Packages for internal @atom63 packages.
+#
+# Manual trigger only — publishing is irreversible. Run from the Actions tab.
+#
+# REQUIRES a repo secret `NPM_TOKEN`: an npm automation token for an account that
+# is a member of the (free) @atom63 npm org with publish rights. Create the org +
+# token at npmjs.com first.
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: "Dry run — build + npm pack only, do not publish"
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-slides-npm
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Build & publish to npmjs.org
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+
+      - run: pnpm install --frozen-lockfile
+
+      # slides-skill has no build (docs only); the others build to dist.
+      - name: Build packages
+        run: >-
+          pnpm
+          --filter @atom63/slides
+          --filter @atom63/slides-vite
+          --filter @atom63/create-deck
+          --filter @atom63/slides-editor
+          build
+
+      - name: Dry run (pack)
+        if: ${{ inputs.dry-run }}
+        run: |
+          set -euo pipefail
+          for pkg in @atom63/slides @atom63/slides-vite @atom63/create-deck @atom63/slides-skill @atom63/slides-editor; do
+            echo "::group::pack $pkg"
+            pnpm --filter "$pkg" exec npm pack --dry-run
+            echo "::endgroup::"
+          done
+
+      # Publish in dependency order. pnpm rewrites workspace: refs to real
+      # versions; each package's publishConfig already sets access:public.
+      - name: Publish to npm
+        if: ${{ !inputs.dry-run }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          set -euo pipefail
+          for pkg in @atom63/slides @atom63/slides-vite @atom63/create-deck @atom63/slides-skill @atom63/slides-editor; do
+            echo "::group::publish $pkg"
+            pnpm --filter "$pkg" publish --access public --no-git-checks
+            echo "::endgroup::"
+          done

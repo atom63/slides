@@ -1,0 +1,30 @@
+/* =============================================================================
+   SLIDE REVEAL ANIMATIONS
+   Opt-in entrance animation for slide content. Add class `reveal` and set
+   `--stagger-index` inline style on any element to animate it in when the
+   slide becomes visible. Replays on every slide navigation.
+   ============================================================================= */
+
+@keyframes slide-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  animation: slide-reveal 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation-delay: calc(var(--stagger-index, 0) * 80ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
