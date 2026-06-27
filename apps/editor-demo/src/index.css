@@ -3,8 +3,8 @@
 /* Scan the engine's built classes AND the editor's own source so Tailwind
    generates every utility used by the slides + editor chrome. A published
    consumer would point @source at node_modules/@atom63/slides/dist instead. */
-@source "../../slides/dist/**/*.js";
-@source "../src/**/*.{ts,tsx}";
+@source "../../../packages/slides/dist/**/*.js";
+@source "./**/*.{ts,tsx}";
 
 html,
 body,

@@ -108,12 +108,7 @@ function Ins({ className, ...props }: ComponentProps<'ins'>) {
 
 function Code({ className, ...props }: ComponentProps<'code'>) {
   const isBlock = className?.includes('language-')
-  return (
-    <code
-      className={cn(isBlock ? mdxStyles.content.code : mdxStyles.content.inlineCode, className)}
-      {...props}
-    />
-  )
+  return <code className={cn(isBlock ? mdxStyles.content.code : mdxStyles.content.inlineCode, className)} {...props} />
 }
 
 function Kbd({ className, ...props }: ComponentProps<'kbd'>) {
@@ -213,6 +208,7 @@ function Hr({ className, ...props }: ComponentProps<'hr'>) {
 // ---------------------------------------------------------------------------
 
 function Img({ className, alt = '', ...props }: ComponentProps<'img'>) {
+  // biome-ignore lint/correctness/useImageSize: MDX often omits dimensions; max-w-full preserves layout
   return <img alt={alt} className={cn(mdxStyles.content.img, className)} {...props} />
 }
 

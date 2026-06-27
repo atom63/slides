@@ -132,6 +132,34 @@ getTemplate('StatBento')
 // → { name, label, category, props: [...], slots: [{ name: 'Stat', min: 0, max: 6, props: [...] }, ...] }
 ```
 
+## Subpath exports
+
+Beyond the engine entry (`@atom63/slides`) and the style sheets (`@atom63/slides/styles`, `@atom63/slides/theme-defaults`), two optional subpaths ship in the same package.
+
+### `@atom63/slides/vite` — build-time Vite plugins
+
+For multi-deck apps, the Vite plugins extract MDX frontmatter into a static manifest (so decks code-split into lazy chunks) and make `*.mdx?raw` imports resolve to source even when `@mdx-js/rollup` is active. `vite` is an optional peer dependency — install it only if you use this subpath.
+
+```ts
+// vite.config.ts
+import { mdxManifestPlugin, mdxRawPlugin } from '@atom63/slides/vite'
+
+export default defineConfig({
+  plugins: [mdxManifestPlugin(), mdxRawPlugin() /* …mdx(), react(), tailwindcss() */],
+})
+```
+
+### `@atom63/slides/editor` — live deck editor
+
+A GUI deck editor with a live, runtime-compiled preview (no bundler in the loop), a registry-driven template palette, and a light/dark preview toggle. Import its chrome stylesheet as a side effect.
+
+```tsx
+import { DeckEditor } from '@atom63/slides/editor'
+import '@atom63/slides/editor/styles'
+
+<DeckEditor source={deckMdxSource} onChange={setSource} />
+```
+
 ## License
 
 MIT © You Zhang (ATOM63)

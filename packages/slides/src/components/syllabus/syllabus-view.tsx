@@ -1,5 +1,6 @@
-import { MDXProvider } from '@mdx-js/react'
 import { Link, Printer } from 'lucide-react'
+import { Button } from '../primitives'
+import { MDXProvider } from '@mdx-js/react'
 import type { ComponentType } from 'react'
 import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { toast } from 'sonner'
@@ -7,7 +8,6 @@ import { slideMdxComponents } from '../../content/mdx-components'
 import { syllabusMdxComponents } from '../../content/syllabus-mdx-components'
 import type { DeckOutline } from '../../hooks/use-deck-outline'
 import { SlideRenderModeContext } from '../../stores/render-mode'
-import { Button } from '../primitives'
 import './syllabus-print.css'
 
 // Null component for suppressing MDX slide-break separators (---) in reading view.

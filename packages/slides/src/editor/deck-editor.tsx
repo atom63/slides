@@ -1,5 +1,3 @@
-import type { SlideDeckItem } from '@atom63/slides'
-import { listTemplates, SlidesPlayer } from '@atom63/slides'
 import {
   type ChangeEvent,
   type ComponentType,
@@ -9,6 +7,9 @@ import {
   useRef,
   useState,
 } from 'react'
+import { listTemplates } from '../content/template-registry'
+import { SlidesPlayer } from '../player/slides-player'
+import type { SlideDeckItem } from '../types'
 import { compileDeck } from './compile-deck'
 import { templateSnippets } from './template-snippets'
 
@@ -48,7 +49,7 @@ type EditorTheme = 'light' | 'dark'
  * keystroke never blanks or crashes the editor.
  *
  * The editor's own chrome is styled by self-contained plain CSS shipped as a
- * side-effect import — consumers must `import '@atom63/slides-editor/styles'`
+ * side-effect import — consumers must `import '@atom63/slides/editor/styles'`
  * (the CSS is intentionally NOT bundled into the JS so it isn't orphaned by the
  * build, mirroring how `@atom63/slides` ships `./styles`).
  *

@@ -1,9 +1,9 @@
 {
   "name": "@atom63/slides-skill",
   "version": "0.1.0",
-  "description": "Distributable AI-agent skill for authoring Swiss-design presentation decks with the standalone @atom63/slides engine.",
+  "description": "Docs / Claude-Code-plugin source: an AI-agent skill for authoring Swiss-design presentation decks with the @atom63/slides engine. Not published to npm — lives as a repo folder, kept a workspace member so the gen script can resolve @atom63/slides.",
   "license": "MIT",
-  "private": false,
+  "private": true,
   "keywords": [
     "slides",
     "presentation",
@@ -17,15 +17,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/atom63/slides.git",
-    "directory": "packages/slides-skill"
-  },
-  "files": [
-    "SKILL.md",
-    "TEMPLATES.md",
-    "scripts"
-  ],
-  "publishConfig": {
-    "access": "public"
+    "directory": "skill"
   },
   "scripts": {
     "gen": "node scripts/gen-templates.mjs"
@@ -33,6 +25,5 @@
   "devDependencies": {
     "@atom63/biome-config": "workspace:*",
     "@atom63/slides": "workspace:*"
-  },
-  "homepage": "https://github.com/atom63/slides/tree/main/packages/slides-skill#readme"
+  }
 }

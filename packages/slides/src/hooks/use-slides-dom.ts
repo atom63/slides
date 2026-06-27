@@ -97,8 +97,8 @@ function showElement(el: HTMLElement, animate: boolean) {
     for (const reveal of reveals) {
       reveal.style.animation = 'none'
     }
-    // Force a single reflow to commit all animation resets before re-enabling.
-    el.offsetHeight
+    // biome-ignore lint/complexity/noVoid: single reflow to commit all animation resets before re-enabling
+    void el.offsetHeight
     for (const reveal of reveals) {
       reveal.style.animation = ''
     }

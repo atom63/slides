@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest'
-import { getTemplate, listTemplates, templateNames, templateRegistry } from './template-registry'
+import {
+  getTemplate,
+  listTemplates,
+  templateNames,
+  templateRegistry,
+} from './template-registry'
 
 const EXPECTED_TEMPLATE_NAMES = [
   'CoverSlide',
@@ -26,7 +31,9 @@ const EXPECTED_TEMPLATE_NAMES = [
 
 describe('template registry coverage', () => {
   it('covers exactly the author-facing templates', () => {
-    expect(Object.keys(templateRegistry).sort()).toEqual([...EXPECTED_TEMPLATE_NAMES].sort())
+    expect(Object.keys(templateRegistry).sort()).toEqual(
+      [...EXPECTED_TEMPLATE_NAMES].sort(),
+    )
   })
 
   it('every entry self-reports its own name as the key', () => {

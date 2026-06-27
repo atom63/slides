@@ -21,13 +21,10 @@ That gives you a Vite + React + Tailwind v4 app wired to the engine, with an exa
 
 | Package | Description |
 | --- | --- |
-| [`@atom63/slides`](packages/slides) | Host-agnostic MDX slide presentation engine — template grammar, token theming, and the player. |
-| [`@atom63/slides-vite`](packages/slides-vite) | Vite plugins for decks — MDX frontmatter manifest + `?raw` virtual module. |
+| [`@atom63/slides`](packages/slides) | Host-agnostic MDX slide presentation engine — template grammar, token theming, and the player. Ships `./vite` (deck Vite plugins — MDX frontmatter manifest + `?raw` virtual module) and `./editor` (GUI deck editor — live MDX preview, template palette, theme toggle) subpath exports. |
 | [`@atom63/create-deck`](packages/create-deck) | Scaffolder: `npm create @atom63/deck` bootstraps a standalone deck project. |
-| [`@atom63/slides-skill`](packages/slides-skill) | Distributable AI-agent skill for authoring decks against the template grammar. |
-| [`@atom63/slides-editor`](packages/slides-editor) | GUI deck editor — live MDX preview, template palette, and theme toggle. |
 
-The repo also ships an [`apps/deck-starter`](apps/deck-starter) reference app demonstrating the engine end-to-end against a single MDX deck.
+The repo also ships reference apps: [`apps/deck-starter`](apps/deck-starter) demonstrates the engine end-to-end against a single MDX deck, and [`apps/editor-demo`](apps/editor-demo) exercises the `@atom63/slides/editor` GUI. The [`skill/`](skill) folder holds the AI-agent skill source for authoring decks against the template grammar (repo docs — not published to npm).
 
 ## Develop
 

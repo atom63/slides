@@ -1,3 +1,5 @@
+import { mdxComponents } from './vendored-mdx-components'
+import { mdxStyles } from './mdx-styles'
 import type { ReactNode } from 'react'
 import { useContext } from 'react'
 import {
@@ -12,7 +14,6 @@ import {
   SlideVideo,
   TalkTrack,
 } from './components'
-import { mdxStyles } from './mdx-styles'
 import {
   Accent,
   Avatar,
@@ -81,7 +82,6 @@ import {
   TextLead,
   TimelineBento,
 } from './templates'
-import { mdxComponents } from './vendored-mdx-components'
 
 function SlideBreak() {
   return <hr data-slide-break />

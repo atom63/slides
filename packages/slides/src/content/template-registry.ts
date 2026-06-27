@@ -453,9 +453,7 @@ export const templateRegistry: Record<string, TemplateDef> = {
 export type TemplateName = keyof typeof templateRegistry
 
 /** All registered template names. */
-export const templateNames: readonly TemplateName[] = Object.keys(
-  templateRegistry
-) as TemplateName[]
+export const templateNames: readonly TemplateName[] = Object.keys(templateRegistry) as TemplateName[]
 
 /** Look up one template definition by component name. */
 export function getTemplate(name: string): TemplateDef | undefined {

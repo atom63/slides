@@ -1,6 +1,6 @@
 import { Lock } from 'lucide-react'
-import { useCallback, useEffect, useState } from 'react'
 import { Button } from '../primitives'
+import { useCallback, useEffect, useState } from 'react'
 
 export interface SlideGateProvider {
   fetchConfigured: (slug: string) => Promise<boolean>

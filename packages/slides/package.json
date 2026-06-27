@@ -8,6 +8,7 @@
     "directory": "packages/slides"
   },
   "homepage": "https://github.com/atom63/slides/tree/main/packages/slides#readme",
+  "bugs": "https://github.com/atom63/slides/issues",
   "type": "module",
   "description": "Host-agnostic MDX slide presentation engine — an opinionated template grammar + token theming for building decks in MDX.",
   "keywords": [
@@ -32,6 +33,20 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
+    "./vite": {
+      "typescript": "./src/vite/index.ts",
+      "types": "./dist/vite/index.d.ts",
+      "import": "./dist/vite/index.js"
+    },
+    "./editor": {
+      "typescript": "./src/editor/index.ts",
+      "types": "./dist/editor/index.d.ts",
+      "import": "./dist/editor/index.js"
+    },
+    "./editor/styles": {
+      "types": "./src/editor/styles.d.ts",
+      "default": "./src/editor/styles.css"
+    },
     "./styles": {
       "types": "./src/styles/styles.d.ts",
       "default": "./src/styles/slides.css"
@@ -47,7 +62,9 @@
   "files": [
     "dist",
     "src/styles/slides.css",
-    "src/styles/theme-defaults.css"
+    "src/styles/theme-defaults.css",
+    "src/editor/styles.css",
+    "src/editor/styles.d.ts"
   ],
   "scripts": {
     "build": "tsup",
@@ -60,11 +77,15 @@
     "@base-ui/react": "^1.3.0",
     "@iconify/react": "^6.0.2",
     "class-variance-authority": "^0.7.1",
+    "@mdx-js/mdx": "^3.1.1",
     "@mdx-js/react": "^3.1.1",
     "@tanstack/react-virtual": "^3.14.2",
     "clsx": "^2.1.1",
+    "gray-matter": "^4.0.3",
+    "js-yaml": "^4.1.0",
     "lucide-react": "^1.18.0",
     "motion": "^12.40.0",
+    "remark-gfm": "^4.0.1",
     "shiki": "^3.23.0",
     "tailwind-merge": "^3.6.0",
     "zustand": "^5.0.0"
@@ -72,18 +93,27 @@
   "peerDependencies": {
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "sonner": "^2.0.7"
+    "sonner": "^2.0.7",
+    "vite": "^5 || ^6 || ^7"
+  },
+  "peerDependenciesMeta": {
+    "vite": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@atom63/biome-config": "workspace:*",
     "@atom63/tsconfig": "workspace:*",
     "@biomejs/biome": "2.4.6",
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^22.10.0",
     "@types/react": "^19.1.13",
     "@types/react-dom": "^19.1.9",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "tsup": "^8.3.5",
     "typescript": "~5.8.3",
+    "vite": "^7.1.5",
     "vitest": "^4.1.8"
   }
 }

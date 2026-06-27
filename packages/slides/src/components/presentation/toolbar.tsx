@@ -1,4 +1,12 @@
 import {
+  Button,
+  ButtonGroup,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '../primitives'
+import {
   ArrowLeft,
   BookOpen,
   Code,
@@ -11,14 +19,6 @@ import {
 } from 'lucide-react'
 import type { Ref } from 'react'
 import { memo } from 'react'
-import {
-  Button,
-  ButtonGroup,
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '../primitives'
 import { PresentationSidebarToggle, PresentationToolbar } from './chrome'
 
 interface PresentationToolbarProps {

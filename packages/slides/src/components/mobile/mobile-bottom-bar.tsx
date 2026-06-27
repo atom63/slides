@@ -1,5 +1,3 @@
-import { BookOpen, ChevronLeft, ChevronRight, LayoutGrid, SlidersHorizontal } from 'lucide-react'
-import type { Ref } from 'react'
 import {
   Button,
   ButtonGroup,
@@ -8,6 +6,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '../primitives'
+import { BookOpen, ChevronLeft, ChevronRight, LayoutGrid, SlidersHorizontal } from 'lucide-react'
+import type { Ref } from 'react'
 
 interface MobileBottomBarProps {
   configButtonRef: Ref<HTMLButtonElement>

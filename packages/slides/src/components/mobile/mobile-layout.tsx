@@ -1,13 +1,3 @@
-import { MDXProvider } from '@mdx-js/react'
-import { ArrowLeft } from 'lucide-react'
-import type { CSSProperties, Ref, RefObject } from 'react'
-import { useRef } from 'react'
-import { slideMdxComponents } from '../../content/mdx-components'
-import type { DeckOutline } from '../../hooks/use-deck-outline'
-import { useSwipeNav } from '../../hooks/use-swipe-nav'
-import { SlidePaddingContext, useSlideConfig } from '../../stores/config-store'
-import type { SlideDeckItem } from '../../types'
-import { SlideConfigPanel } from '../config/config-panel'
 import {
   Button,
   ButtonGroup,
@@ -16,6 +6,16 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '../primitives'
+import { ArrowLeft } from 'lucide-react'
+import { MDXProvider } from '@mdx-js/react'
+import type { CSSProperties, Ref, RefObject } from 'react'
+import { useRef } from 'react'
+import { slideMdxComponents } from '../../content/mdx-components'
+import type { DeckOutline } from '../../hooks/use-deck-outline'
+import { useSwipeNav } from '../../hooks/use-swipe-nav'
+import { SlidePaddingContext, useSlideConfig } from '../../stores/config-store'
+import type { SlideDeckItem } from '../../types'
+import { SlideConfigPanel } from '../config/config-panel'
 import { SlideOverview } from '../stage/overview'
 import { SlideStage } from '../stage/stage'
 import { SyllabusView } from '../syllabus/syllabus-view'

@@ -1,10 +1,14 @@
-import type { SlotDef, SlotGroupDef, TemplateDef } from '@atom63/slides'
-import { listTemplates } from '@atom63/slides'
+import {
+  listTemplates,
+  type SlotDef,
+  type SlotGroupDef,
+  type TemplateDef,
+} from '../content/template-registry'
 
 /**
  * Generates a minimal, paste-ready MDX snippet per template from the engine's
  * registry (`listTemplates()`), mirroring the synthesis logic in
- * `packages/slides-skill/scripts/gen-templates.mjs`. The palette in
+ * `skill/scripts/gen-templates.mjs`. The palette in
  * <DeckEditor> appends `templateSnippets[name]` when a template is clicked.
  *
  * Registry is the single source of truth; snippets cannot drift from the

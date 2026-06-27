@@ -63,6 +63,49 @@ importers:
         specifier: ^7.1.5
         version: 7.3.6(@types/node@24.13.2)(jiti@2.7.0)(lightningcss@1.32.0)(yaml@2.9.0)
 
+  apps/editor-demo:
+    dependencies:
+      '@atom63/slides':
+        specifier: workspace:*
+        version: link:../../packages/slides
+      '@mdx-js/react':
+        specifier: ^3.1.1
+        version: 3.1.1(@types/react@19.2.17)(react@19.2.7)
+      react:
+        specifier: ^19.1.1
+        version: 19.2.7
+      react-dom:
+        specifier: ^19.1.1
+        version: 19.2.7(react@19.2.7)
+      sonner:
+        specifier: ^2.0.7
+        version: 2.0.7(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+    devDependencies:
+      '@atom63/tsconfig':
+        specifier: workspace:*
+        version: link:../../config/tsconfig
+      '@tailwindcss/vite':
+        specifier: ^4.3.1
+        version: 4.3.1(vite@7.3.6(@types/node@24.13.2)(jiti@2.7.0)(lightningcss@1.32.0)(yaml@2.9.0))
+      '@types/react':
+        specifier: ^19.1.13
+        version: 19.2.17
+      '@types/react-dom':
+        specifier: ^19.1.9
+        version: 19.2.3(@types/react@19.2.17)
+      '@vitejs/plugin-react':
+        specifier: ^4.7.0
+        version: 4.7.0(vite@7.3.6(@types/node@24.13.2)(jiti@2.7.0)(lightningcss@1.32.0)(yaml@2.9.0))
+      tailwindcss:
+        specifier: ^4.1.13
+        version: 4.3.1
+      typescript:
+        specifier: ~5.8.3
+        version: 5.8.3
+      vite:
+        specifier: ^7.1.5
+        version: 7.3.6(@types/node@24.13.2)(jiti@2.7.0)(lightningcss@1.32.0)(yaml@2.9.0)
+
   config/biome-config:
     dependencies:
       '@biomejs/biome':
@@ -107,6 +150,9 @@ importers:
       '@iconify/react':
         specifier: ^6.0.2
         version: 6.0.2(react@19.2.7)
+      '@mdx-js/mdx':
+        specifier: ^3.1.1
+        version: 3.1.1
       '@mdx-js/react':
         specifier: ^3.1.1
         version: 3.1.1(@types/react@19.2.17)(react@19.2.7)
@@ -119,12 +165,21 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      gray-matter:
+        specifier: ^4.0.3
+        version: 4.0.3
+      js-yaml:
+        specifier: ^4.1.0
+        version: 4.3.0
       lucide-react:
         specifier: ^1.18.0
         version: 1.21.0(react@19.2.7)
       motion:
         specifier: ^12.40.0
         version: 12.42.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      remark-gfm:
+        specifier: ^4.0.1
+        version: 4.0.1
       shiki:
         specifier: ^3.23.0
         version: 3.23.0
@@ -147,119 +202,24 @@ importers:
       '@biomejs/biome':
         specifier: 2.4.6
         version: 2.4.6
-      '@types/react':
-        specifier: ^19.1.13
-        version: 19.2.17
-      '@types/react-dom':
-        specifier: ^19.1.9
-        version: 19.2.3(@types/react@19.2.17)
-      react:
-        specifier: ^19.1.1
-        version: 19.2.7
-      react-dom:
-        specifier: ^19.1.1
-        version: 19.2.7(react@19.2.7)
-      tsup:
-        specifier: ^8.3.5
-        version: 8.5.1(jiti@2.7.0)(postcss@8.5.15)(typescript@5.8.3)(yaml@2.9.0)
-      typescript:
-        specifier: ~5.8.3
-        version: 5.8.3
-      vitest:
-        specifier: ^4.1.8
-        version: 4.1.9(@types/node@24.13.2)(vite@7.3.6(@types/node@24.13.2)(jiti@2.7.0)(lightningcss@1.32.0)(yaml@2.9.0))
-
-  packages/slides-editor:
-    dependencies:
-      '@mdx-js/mdx':
-        specifier: ^3.1.1
-        version: 3.1.1
-      js-yaml:
-        specifier: ^4.1.0
-        version: 4.3.0
-      remark-gfm:
-        specifier: ^4.0.1
-        version: 4.0.1
-    devDependencies:
-      '@atom63/biome-config':
-        specifier: workspace:*
-        version: link:../../config/biome-config
-      '@atom63/slides':
-        specifier: workspace:*
-        version: link:../slides
-      '@atom63/tsconfig':
-        specifier: workspace:*
-        version: link:../../config/tsconfig
-      '@biomejs/biome':
-        specifier: 2.4.6
-        version: 2.4.6
-      '@mdx-js/react':
-        specifier: ^3.1.1
-        version: 3.1.1(@types/react@19.2.17)(react@19.2.7)
-      '@tailwindcss/vite':
-        specifier: ^4.3.1
-        version: 4.3.1(vite@7.3.6(@types/node@24.13.2)(jiti@2.7.0)(lightningcss@1.32.0)(yaml@2.9.0))
       '@types/js-yaml':
         specifier: ^4.0.9
         version: 4.0.9
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.20.0
       '@types/react':
         specifier: ^19.1.13
         version: 19.2.17
       '@types/react-dom':
         specifier: ^19.1.9
         version: 19.2.3(@types/react@19.2.17)
-      '@vitejs/plugin-react':
-        specifier: ^4.7.0
-        version: 4.7.0(vite@7.3.6(@types/node@24.13.2)(jiti@2.7.0)(lightningcss@1.32.0)(yaml@2.9.0))
       react:
         specifier: ^19.1.1
         version: 19.2.7
       react-dom:
         specifier: ^19.1.1
         version: 19.2.7(react@19.2.7)
-      tailwindcss:
-        specifier: ^4.1.13
-        version: 4.3.1
-      tsup:
-        specifier: ^8.3.5
-        version: 8.5.1(jiti@2.7.0)(postcss@8.5.15)(typescript@5.8.3)(yaml@2.9.0)
-      typescript:
-        specifier: ~5.8.3
-        version: 5.8.3
-      vite:
-        specifier: ^7.1.5
-        version: 7.3.6(@types/node@24.13.2)(jiti@2.7.0)(lightningcss@1.32.0)(yaml@2.9.0)
-      vitest:
-        specifier: ^4.1.8
-        version: 4.1.9(@types/node@24.13.2)(vite@7.3.6(@types/node@24.13.2)(jiti@2.7.0)(lightningcss@1.32.0)(yaml@2.9.0))
-
-  packages/slides-skill:
-    devDependencies:
-      '@atom63/biome-config':
-        specifier: workspace:*
-        version: link:../../config/biome-config
-      '@atom63/slides':
-        specifier: workspace:*
-        version: link:../slides
-
-  packages/slides-vite:
-    dependencies:
-      gray-matter:
-        specifier: ^4.0.3
-        version: 4.0.3
-    devDependencies:
-      '@atom63/biome-config':
-        specifier: workspace:*
-        version: link:../../config/biome-config
-      '@atom63/tsconfig':
-        specifier: workspace:*
-        version: link:../../config/tsconfig
-      '@biomejs/biome':
-        specifier: 2.4.6
-        version: 2.4.6
-      '@types/node':
-        specifier: ^22.10.0
-        version: 22.20.0
       tsup:
         specifier: ^8.3.5
         version: 8.5.1(jiti@2.7.0)(postcss@8.5.15)(typescript@5.8.3)(yaml@2.9.0)
@@ -269,6 +229,18 @@ importers:
       vite:
         specifier: ^7.1.5
         version: 7.3.6(@types/node@22.20.0)(jiti@2.7.0)(lightningcss@1.32.0)(yaml@2.9.0)
+      vitest:
+        specifier: ^4.1.8
+        version: 4.1.9(@types/node@22.20.0)(vite@7.3.6(@types/node@22.20.0)(jiti@2.7.0)(lightningcss@1.32.0)(yaml@2.9.0))
+
+  skill:
+    devDependencies:
+      '@atom63/biome-config':
+        specifier: workspace:*
+        version: link:../config/biome-config
+      '@atom63/slides':
+        specifier: workspace:*
+        version: link:../packages/slides
 
 packages:
 
@@ -3068,13 +3040,13 @@ snapshots:
       chai: 6.2.2
       tinyrainbow: 3.1.0
 
-  '@vitest/mocker@4.1.9(vite@7.3.6(@types/node@24.13.2)(jiti@2.7.0)(lightningcss@1.32.0)(yaml@2.9.0))':
+  '@vitest/mocker@4.1.9(vite@7.3.6(@types/node@22.20.0)(jiti@2.7.0)(lightningcss@1.32.0)(yaml@2.9.0))':
     dependencies:
       '@vitest/spy': 4.1.9
       estree-walker: 3.0.3
       magic-string: 0.30.21
     optionalDependencies:
-      vite: 7.3.6(@types/node@24.13.2)(jiti@2.7.0)(lightningcss@1.32.0)(yaml@2.9.0)
+      vite: 7.3.6(@types/node@22.20.0)(jiti@2.7.0)(lightningcss@1.32.0)(yaml@2.9.0)
 
   '@vitest/pretty-format@4.1.9':
     dependencies:
@@ -4514,10 +4486,10 @@ snapshots:
       lightningcss: 1.32.0
       yaml: 2.9.0
 
-  vitest@4.1.9(@types/node@24.13.2)(vite@7.3.6(@types/node@24.13.2)(jiti@2.7.0)(lightningcss@1.32.0)(yaml@2.9.0)):
+  vitest@4.1.9(@types/node@22.20.0)(vite@7.3.6(@types/node@22.20.0)(jiti@2.7.0)(lightningcss@1.32.0)(yaml@2.9.0)):
     dependencies:
       '@vitest/expect': 4.1.9
-      '@vitest/mocker': 4.1.9(vite@7.3.6(@types/node@24.13.2)(jiti@2.7.0)(lightningcss@1.32.0)(yaml@2.9.0))
+      '@vitest/mocker': 4.1.9(vite@7.3.6(@types/node@22.20.0)(jiti@2.7.0)(lightningcss@1.32.0)(yaml@2.9.0))
       '@vitest/pretty-format': 4.1.9
       '@vitest/runner': 4.1.9
       '@vitest/snapshot': 4.1.9
@@ -4534,10 +4506,10 @@ snapshots:
       tinyexec: 1.2.4
       tinyglobby: 0.2.17
       tinyrainbow: 3.1.0
-      vite: 7.3.6(@types/node@24.13.2)(jiti@2.7.0)(lightningcss@1.32.0)(yaml@2.9.0)
+      vite: 7.3.6(@types/node@22.20.0)(jiti@2.7.0)(lightningcss@1.32.0)(yaml@2.9.0)
       why-is-node-running: 2.3.0
     optionalDependencies:
-      '@types/node': 24.13.2
+      '@types/node': 22.20.0
     transitivePeerDependencies:
       - msw
 

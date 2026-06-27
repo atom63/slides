@@ -1,9 +1,9 @@
 import { PanelLeft } from 'lucide-react'
+import { Button } from '../primitives'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import type React from 'react'
 import { memo, useEffect, useState } from 'react'
 import { cn } from '../../lib/cn'
-import { Button } from '../primitives'
 
 const RESIZE_STEP = 16
 

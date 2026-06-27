@@ -1,15 +1,15 @@
 import '@atom63/slides/theme-defaults'
 import '@atom63/slides/styles'
-import '@atom63/slides-editor/styles'
+import '@atom63/slides/editor/styles'
 import './index.css'
-import { DeckEditor } from '@atom63/slides-editor'
+import { DeckEditor } from '@atom63/slides/editor'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
 const SAMPLE = `---
 title: Live Deck Editor
 date: 2026-06-26
-description: Dogfooding @atom63/slides-editor with a runtime-compiled deck.
+description: Dogfooding @atom63/slides/editor with a runtime-compiled deck.
 ---
 
 import { CoverSlide, StatementSlide, StatBento, ClosingSlide } from "@atom63/slides"
@@ -17,7 +17,7 @@ import { CoverSlide, StatementSlide, StatBento, ClosingSlide } from "@atom63/sli
 <CoverSlide
   title="Live Deck Editor"
   subtitle="Edit the MDX on the right — this preview recompiles at runtime."
-  eyebrow="@atom63/slides-editor"
+  eyebrow="@atom63/slides/editor"
   credit="v0.1"
 />
 
@@ -59,10 +59,7 @@ import { CoverSlide, StatementSlide, StatBento, ClosingSlide } from "@atom63/sli
 />
 `
 
-const rootElement = document.getElementById('root')
-if (!rootElement) throw new Error('Root element #root not found')
-
-createRoot(rootElement).render(
+createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <div style={{ height: '100vh', width: '100vw' }}>
       <DeckEditor source={SAMPLE} />

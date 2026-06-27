@@ -63,16 +63,16 @@
      intentionally omitted to avoid leaking across apps. */
 
   #syllabus-print-clone {
-    box-sizing: border-box;
-    display: block;
-    width: 100%;
-    max-width: none;
-    padding: 0.6in 0.7in;
-    margin: 0;
-    color: black;
-    background: white;
-    -webkit-box-decoration-break: clone;
-    box-decoration-break: clone;
+    box-sizing: border-box !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    padding: 0.6in 0.7in !important;
+    margin: 0 !important;
+    color: black !important;
+    background: white !important;
+    -webkit-box-decoration-break: clone !important;
+    box-decoration-break: clone !important;
   }
 
   #syllabus-print-clone .syllabus-prose h1,
@@ -86,14 +86,14 @@
   }
 
   #syllabus-print-clone a {
-    color: black;
-    text-decoration-color: #999;
+    color: black !important;
+    text-decoration-color: #999 !important;
   }
 
   #syllabus-print-clone > header {
     break-inside: avoid;
     page-break-inside: avoid;
-    border-top-color: black;
+    border-top-color: black !important;
   }
 
   @page {

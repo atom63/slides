@@ -1,6 +1,6 @@
+import { mdxComponents } from './vendored-mdx-components'
 import type { HTMLAttributes, ImgHTMLAttributes, ReactNode } from 'react'
 import { cn } from '../lib/cn'
-import { mdxComponents } from './vendored-mdx-components'
 
 /**
  * MDX component map for content inside `<Syllabus>` blocks.
@@ -221,6 +221,7 @@ export const syllabusMdxComponents = {
 
   // Image: compact vertical rhythm in a reading panel (my-4 vs my-10).
   img: ({ alt, className, ...props }: ImgHTMLAttributes<HTMLImageElement>) => (
+    // biome-ignore lint/correctness/useImageSize: MDX often omits dimensions; max-w-full preserves layout
     <img
       alt={alt ?? ''}
       className={cn('my-4 h-auto max-w-full rounded-md border border-border/40', className)}

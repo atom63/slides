@@ -41,21 +41,21 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      # slides-skill has no build (docs only); the others build to dist.
+      # The slides toolchain consolidated to 2 publishable packages: the engine
+      # (@atom63/slides — which now carries the ./vite and ./editor subpaths) and
+      # the create-deck CLI. (slides-skill is repo docs, not an npm package.)
       - name: Build packages
         run: >-
           pnpm
           --filter @atom63/slides
-          --filter @atom63/slides-vite
           --filter @atom63/create-deck
-          --filter @atom63/slides-editor
           build
 
       - name: Dry run (pack)
         if: ${{ inputs.dry-run }}
         run: |
           set -euo pipefail
-          for pkg in @atom63/slides @atom63/slides-vite @atom63/create-deck @atom63/slides-skill @atom63/slides-editor; do
+          for pkg in @atom63/slides @atom63/create-deck; do
             echo "::group::pack $pkg"
             pnpm --filter "$pkg" exec npm pack --dry-run
             echo "::endgroup::"
@@ -69,7 +69,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           set -euo pipefail
-          for pkg in @atom63/slides @atom63/slides-vite @atom63/create-deck @atom63/slides-skill @atom63/slides-editor; do
+          for pkg in @atom63/slides @atom63/create-deck; do
             echo "::group::publish $pkg"
             pnpm --filter "$pkg" publish --access public --no-git-checks
             echo "::endgroup::"

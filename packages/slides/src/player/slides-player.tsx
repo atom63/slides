@@ -38,12 +38,12 @@ export function SlidesPlayer({
 
   const isLocked = deck.meta.locked ?? false
 
-  if (isLocked && !deckUnlocked && gateProvider) {
+  if (isLocked && !deckUnlocked) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-background px-4">
         <SlidePasswordGate
           deckTitle={deck.meta.title}
-          gateProvider={gateProvider}
+          gateProvider={gateProvider!}
           onBack={onBack}
           onUnlock={() => setDeckUnlocked(true)}
           renderCodeGate={renderCodeGate}

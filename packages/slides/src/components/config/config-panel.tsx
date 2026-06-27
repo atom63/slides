@@ -1,3 +1,4 @@
+import { Button, Kbd, Label, SegmentControl, Separator, Switch } from '../primitives'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import type { RefObject } from 'react'
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
@@ -8,7 +9,6 @@ import {
   type SlideConfigTypographyScale,
   useSlideConfig,
 } from '../../stores/config-store'
-import { Button, Kbd, Label, SegmentControl, Separator, Switch } from '../primitives'
 
 const PANEL_VISIBLE = { opacity: 1, y: 0 } as const
 const PANEL_HIDDEN = { opacity: 0, y: -4 } as const

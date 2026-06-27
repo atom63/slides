@@ -1,10 +1,10 @@
-import type { SlideDeckMeta } from '@atom63/slides'
-import { slideMdxComponents } from '@atom63/slides'
 import { evaluate } from '@mdx-js/mdx'
 import yaml from 'js-yaml'
 import type { ComponentType } from 'react'
 import * as runtime from 'react/jsx-runtime'
 import remarkGfm from 'remark-gfm'
+import { slideMdxComponents } from '../content/mdx-components'
+import type { SlideDeckMeta } from '../types'
 
 /**
  * Browser-safe YAML frontmatter split. We deliberately avoid the common

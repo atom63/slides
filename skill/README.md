@@ -1,6 +1,8 @@
 # @atom63/slides-skill
 
-A distributable **AI-agent skill** that teaches an agent to author Swiss-design presentation decks with the standalone [`@atom63/slides`](../slides) engine — the same way a SKILL.md plugin ships authoring guidance to a coding agent.
+A repo-local **docs / Claude-Code-plugin source**: an AI-agent skill that teaches an agent to author Swiss-design presentation decks with the standalone [`@atom63/slides`](../packages/slides) engine — the same way a SKILL.md plugin ships authoring guidance to a coding agent.
+
+> This is **not** an npm package. It lives as a top-level `skill/` folder (a private pnpm workspace member only so `scripts/gen-templates.mjs` can resolve `@atom63/slides`). Consume it as docs / a skills-folder source, not via `npm install`.
 
 The skill retargets the internal slide-authoring playbook to the **published OSS package**: agents scaffold a deck with the `@atom63/create-deck` CLI, write `src/deck.mdx` importing templates from `@atom63/slides`, and preview with Vite.
 
@@ -16,7 +18,7 @@ The skill retargets the internal slide-authoring playbook to the **published OSS
 
 Point an agent at `SKILL.md`. Its `description` triggers when a user wants to create, author, or edit a presentation/deck/slides with `@atom63/slides`. The skill links to `TEMPLATES.md` for the full catalog rather than duplicating it inline.
 
-For agent runtimes that load skills from a directory (e.g. Claude Code / Cursor), drop this package's `SKILL.md` (and the sibling `TEMPLATES.md` it references) into your skills folder, or install the package and read it from `node_modules/@atom63/slides-skill/`.
+For agent runtimes that load skills from a directory (e.g. Claude Code / Cursor), copy this folder's `SKILL.md` (and the sibling `TEMPLATES.md` it references) into your skills folder.
 
 ## Regenerating the template reference
 
