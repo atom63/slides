@@ -99,27 +99,56 @@ import { CoverSlide, StatementSlide } from "@atom63/slides";
 
 ## Styling
 
-The engine uses Tailwind v4 utility classes, so your app's Tailwind build must **scan the engine's classes**, and you import its two stylesheets:
-
-**Your main CSS:**
+The engine uses Tailwind v4 utility classes. In your **Tailwind entry CSS**, import its stylesheets and point `@source` at its built classes:
 
 ```css
 @import "tailwindcss";
+@import "@atom63/slides/theme-defaults";   /* tokens + Tailwind @theme color mappings */
+@import "@atom63/slides/styles";           /* slide reveal animations */
 
 /* Generate the utility classes the engine uses. */
 @source "../node_modules/@atom63/slides/dist/**/*.js";
 ```
 
-**Your entry (`main.tsx`), import order matters — defaults first, then the host can override:**
+> Import the engine CSS with **CSS `@import`** (in the Tailwind entry), **not** a JS `import` — `theme-defaults` ships a Tailwind `@theme` block that maps the palette into utilities like `text-foreground`/`bg-primary`, and `@theme` is only processed when the file is part of the Tailwind build.
 
-```ts
-import './index.css'
-import '@atom63/slides/theme-defaults' // standalone default tokens (light)
-import '@atom63/slides/styles'         // reveal animations
+- `@atom63/slides/theme-defaults` — self-contained default values for every token the player reads + the `@theme` color mappings, so it renders out-of-the-box. A host that ships its own design tokens (e.g. via a token package) can skip this import.
+- `@atom63/slides/styles` — the slide reveal animation keyframes.
+
+## Theming
+
+Everything is driven by CSS custom properties, so you restyle a deck without touching components. The default is light (`theme-defaults`).
+
+**Swap to the built-in dark theme** — one extra `@import`, *after* `theme-defaults`, in your Tailwind entry CSS:
+
+```css
+@import "tailwindcss";
+@import "@atom63/slides/theme-defaults";
+@import "@atom63/slides/themes/dark";   /* flips the whole deck to dark */
+@import "@atom63/slides/styles";
 ```
 
-- `@atom63/slides/theme-defaults` — self-contained default values for every token the player reads, so it renders out-of-the-box. A host that ships its own design tokens (e.g. via a token package) overrides these via later cascade; in that case you can skip this import.
-- `@atom63/slides/styles` — the slide reveal animation keyframes.
+**Write your own theme** — override the tokens in your CSS. Most surfaces derive from the base palette via `color-mix`, so a handful of overrides restyle the whole deck:
+
+```css
+:root {
+  /* base palette — drives slides AND chrome */
+  --background: #0b0b10;
+  --foreground: #f2f2f5;
+  --border: #3a3a42;          /* control / panel borders */
+  --primary: #7c5cff;         /* the signal color */
+
+  /* slide-specific knobs (optional) */
+  --theme-slide-accent: var(--primary);
+  --theme-slide-rule-color: color-mix(in oklch, var(--foreground) 25%, transparent);
+  --theme-slide-surface: #1a1a20;   /* card / bento surfaces */
+  --theme-slide-quote-color: #d8d8de;
+}
+```
+
+Key tokens: **base palette** — `--background`, `--foreground`, `--card`, `--muted`, `--muted-foreground`, `--border`, `--input`, `--primary`, `--primary-foreground`, `--accent`; **slides** — `--theme-slide-bg`, `--theme-slide-accent`, `--theme-slide-rule-color`, `--theme-slide-rule-width`, `--theme-slide-surface`, `--theme-slide-muted`, `--theme-slide-code-bg`, `--theme-slide-quote-color`, `--theme-slide-stage-bg`. The full set lives in [`src/styles/theme-defaults.css`](./src/styles/theme-defaults.css) — copy it as a starting point for a custom theme.
+
+> Runtime light/dark toggle: import `themes/dark` is a hard swap. For a toggle, copy `dark.css` and re-scope its `:root` to e.g. `[data-slides-theme="dark"]`, then set that attribute on a wrapper.
 
 ## Authoring
 

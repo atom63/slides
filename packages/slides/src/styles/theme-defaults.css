@@ -2,12 +2,13 @@
    @atom63/slides — STANDALONE DEFAULT TOKENS
 
    Self-contained default values for every theme/palette/contract custom
-   property the slide player reads. Import this ONCE in a standalone consumer
-   (one that does NOT ship the @atom63 design-token CSS) so the player renders
-   correctly out of the box:
+   property the slide player reads. `@import` this into your Tailwind v4 entry
+   CSS (NOT a JS import) so the `@theme` block below is processed and the
+   engine's semantic color utilities (text-foreground, bg-primary, …) resolve:
 
-       import "@atom63/slides/theme-defaults";
-       import "@atom63/slides/styles";
+       @import "tailwindcss";
+       @import "@atom63/slides/theme-defaults";
+       @import "@atom63/slides/styles";
 
    These are ADDITIVE, low-specificity `:root` defaults. A host that ships its
    own design tokens (like os63, which imports @atom63/tokens) defines the same
@@ -21,6 +22,34 @@
    defined IN this file, except Tailwind-provided primitives (--spacing, --tw-*,
    --color-*) which the consumer's Tailwind build supplies.
    ============================================================================= */
+
+/* Map the semantic palette into Tailwind's color theme so utilities like
+   `text-foreground`, `bg-background`, `bg-primary`, `border-input` resolve.
+   `inline` keeps them as `var(--token)` refs, so overriding a token at :root
+   (e.g. a dark theme) flows through at runtime. Requires this file to be
+   @import-ed into the consumer's Tailwind entry (see header). */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-light: var(--light);
+  --color-dark: var(--dark);
+}
 
 :root {
   /* ── Fonts ──────────────────────────────────────────────────────────── */

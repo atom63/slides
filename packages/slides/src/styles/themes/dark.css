@@ -1,0 +1,45 @@
+/* =============================================================================
+   @atom63/slides — DARK THEME
+
+   A dark palette for the slide player. Import it AFTER the default tokens to
+   flip the whole deck (slides + chrome) to dark — every --theme-slide-* and
+   chrome token derives from this base palette via color-mix, so overriding the
+   palette is enough:
+
+       import "@atom63/slides/theme-defaults";   // light defaults + base rules
+       import "@atom63/slides/themes/dark";       // override → dark
+       import "@atom63/slides/styles";
+
+   Want a runtime light/dark toggle instead of a hard import? Re-scope the rule
+   below from `:root` to e.g. `[data-slides-theme="dark"]` in your own CSS.
+   Want a custom theme? Override any of these tokens in your own stylesheet.
+   ============================================================================= */
+:root {
+  /* ── Base palette (dark) ─────────────────────────────────────────────── */
+  --background: rgba(20, 20, 22, 1);
+  --foreground: rgba(237, 237, 240, 1);
+  --card: rgba(28, 28, 31, 1);
+  --popover: rgba(28, 28, 31, 1);
+  --popover-foreground: rgba(237, 237, 240, 1);
+  --light: rgba(252, 252, 252, 1);
+  --dark: rgba(12, 12, 14, 1);
+  --muted: rgba(40, 40, 44, 1);
+  --muted-foreground: rgba(160, 160, 166, 1);
+  --secondary: rgba(40, 40, 44, 1);
+  --secondary-foreground: rgba(210, 210, 215, 1);
+  --border: rgba(74, 74, 80, 1);
+  --input: rgba(62, 62, 68, 1);
+  --ring: rgba(90, 90, 98, 1);
+  --accent: color-mix(in srgb, rgba(48, 48, 53, 1), transparent 20%);
+  --accent-foreground: rgba(237, 237, 240, 1);
+  --primary: rgba(80, 150, 255, 1);
+  --primary-foreground: rgba(8, 14, 24, 1);
+  --destructive: rgba(240, 96, 92, 1);
+
+  /* ── Slide surfaces that read better tuned explicitly on dark ────────── */
+  --theme-slide-stage-bg: rgba(12, 12, 14, 1);
+  --theme-slide-stage-slide-ring: rgba(255, 255, 255, 0.06);
+  --theme-slide-surface: rgba(34, 34, 38, 1);
+  --theme-slide-code-bg: rgba(34, 34, 38, 1);
+  --theme-switch-track-shadow: inset 0 1px rgb(0 0 0 / 0.2);
+}

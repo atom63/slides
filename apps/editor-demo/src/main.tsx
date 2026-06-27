@@ -1,6 +1,3 @@
-import '@atom63/slides/theme-defaults'
-import '@atom63/slides/styles'
-import '@atom63/slides/editor/styles'
 import './index.css'
 import { DeckEditor } from '@atom63/slides/editor'
 import { StrictMode } from 'react'

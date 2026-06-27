@@ -1,5 +1,10 @@
 @import "tailwindcss";
+@import "@atom63/slides/theme-defaults";
+@import "@atom63/slides/styles";
+/* For a dark deck, also: @import "@atom63/slides/themes/dark"; */
+
 /* Scan the engine's built classes so Tailwind generates the utilities the
    @atom63/slides templates rely on. */
 @source "../node_modules/@atom63/slides/dist/**/*.js";
+
 html, body, #root { height: 100%; margin: 0; }

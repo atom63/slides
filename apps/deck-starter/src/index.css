@@ -1,5 +1,9 @@
 @import "tailwindcss";
+@import "@atom63/slides/theme-defaults";
+@import "@atom63/slides/styles";
+
 /* Scan the engine's built classes so Tailwind generates them (a published
-   consumer would point this at node_modules/@atom63/slides/dist instead). */
+   consumer points this at node_modules/@atom63/slides/dist instead). */
 @source "../../../packages/slides/dist/**/*.js";
+
 html, body, #root { height: 100%; margin: 0; }
