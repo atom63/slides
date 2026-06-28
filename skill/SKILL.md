@@ -136,6 +136,14 @@ The primitives already encode these defaults — you usually don't fight them:
 7. **One `<Title>` (72px) per slide.** Bento cell heads use `<Subtitle>` (44px) so they don't outcompete the slide title.
 8. **Four-glyph shape vocabulary.** `▲` cover/opening · `■` section/content/default · `◆` quote/aside · `▼` closing/fin. Don't mix in `§ ¶` or other glyphs.
 
+### Theming
+
+Theming is **token-driven and controllable** — never hand-write component CSS to restyle a deck. To re-theme, either `@import` one of the built-in themes (after `theme-defaults`, in the Tailwind entry CSS) or override the documented tokens (palette + the three font tokens + `--theme-slide-*`) in your own `:root`. A theme is *only* a `:root` token override; there is no per-theme component code.
+
+```css
+@import "@atom63/slides/themes/dark";       /* or: terminal | editorial | neon | bold */
+```
+
 ## 5. Structure
 
 A deck should read as one authored object, not loose artboards:

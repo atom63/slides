@@ -56,6 +56,18 @@
     },
     "./themes/dark": {
       "default": "./src/styles/themes/dark.css"
+    },
+    "./themes/terminal": {
+      "default": "./src/styles/themes/terminal.css"
+    },
+    "./themes/editorial": {
+      "default": "./src/styles/themes/editorial.css"
+    },
+    "./themes/neon": {
+      "default": "./src/styles/themes/neon.css"
+    },
+    "./themes/bold": {
+      "default": "./src/styles/themes/bold.css"
     }
   },
   "sideEffects": [
@@ -66,6 +78,10 @@
     "src/styles/slides.css",
     "src/styles/theme-defaults.css",
     "src/styles/themes/dark.css",
+    "src/styles/themes/terminal.css",
+    "src/styles/themes/editorial.css",
+    "src/styles/themes/neon.css",
+    "src/styles/themes/bold.css",
     "src/editor/styles.css",
     "src/editor/styles.d.ts"
   ],

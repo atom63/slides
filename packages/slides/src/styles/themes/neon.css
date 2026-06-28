@@ -1,0 +1,47 @@
+/* =============================================================================
+   @atom63/slides — NEON THEME
+
+   A dark "cyber" palette for the slide player — deep navy with a cyan signal and
+   magenta destructive. Palette-led (no special webfont, to keep it light).
+   Import it AFTER the default tokens to flip the whole deck (slides + chrome) to
+   this look; every --theme-slide-* and chrome token derives from this base
+   palette, so overriding the palette is enough:
+
+       import "@atom63/slides/theme-defaults";   // light defaults + base rules
+       import "@atom63/slides/themes/neon";       // override → neon
+       import "@atom63/slides/styles";
+
+   A theme is ONLY a :root override of the documented tokens — no per-theme
+   component code. Override any of these tokens in your own stylesheet to tweak.
+
+   Palette adapted from zarazhangrui/frontend-slides (MIT).
+   ============================================================================= */
+:root {
+  /* ── Base palette (neon) ─────────────────────────────────────────────── */
+  --background: #0a0f1c;
+  --foreground: #e6f0ff;
+  --card: #111829;
+  --popover: #111829;
+  --popover-foreground: #e6f0ff;
+  --muted: #141b2e;
+  --muted-foreground: #8da2c0;
+  --secondary: #141b2e;
+  --secondary-foreground: #cfe0ff;
+  --border: #243049;
+  --input: #243049;
+  --ring: #00ffcc;
+  --accent: #16203a;
+  --accent-foreground: #e6f0ff;
+  --primary: #00ffcc;
+  --primary-foreground: #04121a;
+  --destructive: #ff00aa;
+
+  /* ── Fonts — defaults (this is a palette-only theme) ─────────────────── */
+
+  /* ── Slide surfaces tuned for the cyber look ─────────────────────────── */
+  --theme-slide-stage-bg: #05080f;
+  --theme-slide-surface: #111829;
+  --theme-slide-code-bg: #111829;
+  --theme-slide-accent: #00ffcc;
+  --theme-slide-quote-color: #b9e8ff;
+}

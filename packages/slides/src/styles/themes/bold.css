@@ -1,0 +1,48 @@
+/* =============================================================================
+   @atom63/slides — BOLD THEME
+
+   A dark, high-impact palette for the slide player — charcoal greys with a
+   bright orange signal and a strong Archivo sans for headlines. Import it AFTER
+   the default tokens to flip the whole deck (slides + chrome) to this look;
+   every --theme-slide-* and chrome token derives from this base palette, so
+   overriding the palette + font tokens is enough:
+
+       import "@atom63/slides/theme-defaults";   // light defaults + base rules
+       import "@atom63/slides/themes/bold";       // override → bold
+       import "@atom63/slides/styles";
+
+   A theme is ONLY a :root override of the documented tokens — no per-theme
+   component code. Override any of these tokens in your own stylesheet to tweak.
+
+   Palette adapted from zarazhangrui/frontend-slides (MIT).
+   ============================================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&display=swap');
+:root {
+  /* ── Base palette (bold) ─────────────────────────────────────────────── */
+  --background: #1a1a1a;
+  --foreground: #ffffff;
+  --card: #242424;
+  --popover: #242424;
+  --popover-foreground: #ffffff;
+  --muted: #2a2a2a;
+  --muted-foreground: #a0a0a0;
+  --secondary: #2a2a2a;
+  --secondary-foreground: #e0e0e0;
+  --border: #3a3a3a;
+  --input: #3a3a3a;
+  --ring: #ff5722;
+  --accent: #2e2e2e;
+  --accent-foreground: #ffffff;
+  --primary: #ff5722;
+  --primary-foreground: #1a1a1a;
+  --destructive: #ff5722;
+
+  /* ── Fonts — strong sans headlines; serif & mono stay default ────────── */
+  --font-sans: "Archivo", ui-sans-serif, system-ui, sans-serif;
+
+  /* ── Slide surfaces tuned for the high-impact look ───────────────────── */
+  --theme-slide-stage-bg: #0e0e0e;
+  --theme-slide-surface: #242424;
+  --theme-slide-code-bg: #242424;
+  --theme-slide-accent: #ff5722;
+}

@@ -119,7 +119,7 @@ The engine uses Tailwind v4 utility classes. In your **Tailwind entry CSS**, imp
 
 Everything is driven by CSS custom properties, so you restyle a deck without touching components. The default is light (`theme-defaults`).
 
-**Swap to the built-in dark theme** — one extra `@import`, *after* `theme-defaults`, in your Tailwind entry CSS:
+**Swap to a built-in theme** — one extra `@import`, *after* `theme-defaults`, in your Tailwind entry CSS:
 
 ```css
 @import "tailwindcss";
@@ -127,6 +127,22 @@ Everything is driven by CSS custom properties, so you restyle a deck without tou
 @import "@atom63/slides/themes/dark";   /* flips the whole deck to dark */
 @import "@atom63/slides/styles";
 ```
+
+Five themes ship in the box — each is one line, swapped for the `dark` line above:
+
+| Theme | Import | Look |
+|---|---|---|
+| `dark` | `@import "@atom63/slides/themes/dark";` | Neutral dark, blue signal. |
+| `terminal` | `@import "@atom63/slides/themes/terminal";` | Dark monospace; phosphor-green on GitHub-dark greys. |
+| `editorial` | `@import "@atom63/slides/themes/editorial";` | Light paper & ink; Cormorant serif, editorial red. |
+| `neon` | `@import "@atom63/slides/themes/neon";` | Dark cyber; cyan/magenta on navy. |
+| `bold` | `@import "@atom63/slides/themes/bold";` | Dark, charcoal + bright orange, strong Archivo sans. |
+
+> Theme palettes adapted from [zarazhangrui/frontend-slides](https://github.com/zarazhangrui/frontend-slides) (MIT).
+
+### Theme contract
+
+A theme is **only** a `:root` override of documented CSS custom properties — a palette, the three font tokens (`--font-sans` for headings/body, `--font-mono` for labels/code, `--font-serif` for quotes), and a few `--theme-slide-*` polish tokens — plus an optional `@import url(...)` for a webfont. **There is no per-theme component code.** This is the controllable surface: to restyle a deck you set or override these tokens, you do **not** write freeform CSS or bespoke components. The complete token set lives in [`src/styles/theme-defaults.css`](./src/styles/theme-defaults.css) — that file is the contract; every built-in theme is just a subset of it overridden. Model a new theme on any of the shipped files in [`src/styles/themes/`](./src/styles/themes/).
 
 **Write your own theme** — override the tokens in your CSS. Most surfaces derive from the base palette via `color-mix`, so a handful of overrides restyle the whole deck:
 

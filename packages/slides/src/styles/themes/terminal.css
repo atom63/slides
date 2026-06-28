@@ -1,0 +1,50 @@
+/* =============================================================================
+   @atom63/slides — TERMINAL THEME
+
+   A dark, monospace "terminal" palette for the slide player — GitHub-dark greys
+   with a phosphor-green signal color and JetBrains Mono everywhere. Import it
+   AFTER the default tokens to flip the whole deck (slides + chrome) to this look;
+   every --theme-slide-* and chrome token derives from this base palette, so
+   overriding the palette + font tokens is enough:
+
+       import "@atom63/slides/theme-defaults";   // light defaults + base rules
+       import "@atom63/slides/themes/terminal";   // override → terminal
+       import "@atom63/slides/styles";
+
+   A theme is ONLY a :root override of the documented tokens — no per-theme
+   component code. Override any of these tokens in your own stylesheet to tweak.
+
+   Palette adapted from zarazhangrui/frontend-slides (MIT).
+   ============================================================================= */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
+:root {
+  /* ── Base palette (terminal) ─────────────────────────────────────────── */
+  --background: #0d1117;
+  --foreground: #c9d1d9;
+  --card: #161b22;
+  --popover: #161b22;
+  --popover-foreground: #c9d1d9;
+  --muted: #161b22;
+  --muted-foreground: #8b949e;
+  --secondary: #161b22;
+  --secondary-foreground: #c9d1d9;
+  --border: #30363d;
+  --input: #30363d;
+  --ring: #39d353;
+  --accent: #1f2630;
+  --accent-foreground: #c9d1d9;
+  --primary: #39d353;
+  --primary-foreground: #0d1117;
+  --destructive: #f85149;
+
+  /* ── Fonts — mono everything, that's the terminal vibe ───────────────── */
+  --font-sans: "JetBrains Mono", ui-monospace, monospace;
+  --font-serif: "JetBrains Mono", ui-monospace, monospace;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* ── Slide surfaces tuned for the terminal look ──────────────────────── */
+  --theme-slide-stage-bg: #010409;
+  --theme-slide-surface: #161b22;
+  --theme-slide-code-bg: #161b22;
+  --theme-slide-accent: #39d353;
+}

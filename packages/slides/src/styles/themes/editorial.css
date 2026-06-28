@@ -1,0 +1,48 @@
+/* =============================================================================
+   @atom63/slides — EDITORIAL THEME
+
+   A light, serif "paper & ink" palette for the slide player — warm off-white
+   stock, near-black ink, a deep editorial red signal, and Cormorant serif
+   headlines. Import it AFTER the default tokens to flip the whole deck (slides +
+   chrome) to this look; every --theme-slide-* and chrome token derives from this
+   base palette, so overriding the palette + font tokens is enough:
+
+       import "@atom63/slides/theme-defaults";   // light defaults + base rules
+       import "@atom63/slides/themes/editorial";  // override → editorial
+       import "@atom63/slides/styles";
+
+   A theme is ONLY a :root override of the documented tokens — no per-theme
+   component code. Override any of these tokens in your own stylesheet to tweak.
+
+   Palette adapted from zarazhangrui/frontend-slides (MIT).
+   ============================================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap');
+:root {
+  /* ── Base palette (editorial) ────────────────────────────────────────── */
+  --background: #faf9f7;
+  --foreground: #1a1a1a;
+  --card: #ffffff;
+  --popover: #ffffff;
+  --popover-foreground: #1a1a1a;
+  --muted: #efece6;
+  --muted-foreground: #6b6258;
+  --secondary: #efece6;
+  --secondary-foreground: #4a4038;
+  --border: #e2dcd2;
+  --input: #d9d2c6;
+  --ring: #c41e3a;
+  --accent: #efe7dc;
+  --accent-foreground: #1a1a1a;
+  --primary: #c41e3a;
+  --primary-foreground: #fff7f5;
+  --destructive: #c41e3a;
+
+  /* ── Fonts — serif headlines & body; mono stays default ──────────────── */
+  --font-sans: "Cormorant", Georgia, serif;
+  --font-serif: "Cormorant", Georgia, serif;
+
+  /* ── Slide surfaces tuned for the paper & ink look ───────────────────── */
+  --theme-slide-stage-bg: #ece8e1;
+  --theme-slide-surface: #ffffff;
+  --theme-slide-quote-color: #2a2a2a;
+}
