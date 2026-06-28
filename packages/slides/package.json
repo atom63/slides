@@ -7,6 +7,9 @@
     "url": "https://github.com/atom63/slides.git",
     "directory": "packages/slides"
   },
+  "bugs": {
+    "url": "https://github.com/atom63/slides/issues"
+  },
   "homepage": "https://github.com/atom63/slides/tree/main/packages/slides#readme",
   "type": "module",
   "description": "Host-agnostic MDX slide presentation engine — an opinionated template grammar + token theming for building decks in MDX.",
@@ -21,7 +24,8 @@
     "design-system"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "main": "./dist/index.js",
   "module": "./dist/index.js",

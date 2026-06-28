@@ -4,15 +4,22 @@
   "license": "MIT",
   "type": "module",
   "description": "Scaffold a standalone deck project powered by the @atom63/slides engine",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/atom63/slides.git",
+    "directory": "packages/create-deck"
+  },
+  "bugs": {
+    "url": "https://github.com/atom63/slides/issues"
+  },
+  "homepage": "https://github.com/atom63/slides/tree/main/packages/create-deck#readme",
   "bin": {
     "create-deck": "./dist/index.js"
   },
-  "files": [
-    "dist",
-    "templates"
-  ],
+  "files": ["dist", "templates"],
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
     "build": "tsup",
@@ -31,11 +38,5 @@
     "@types/node": "^24.5.1",
     "tsup": "^8.3.5",
     "typescript": "~5.8.3"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/atom63/slides.git",
-    "directory": "packages/create-deck"
-  },
-  "homepage": "https://github.com/atom63/slides/tree/main/packages/create-deck#readme"
+  }
 }
