@@ -1,3 +1,5 @@
+export type { DeckWriteBackOptions } from './deck-write-back-plugin'
+export { deckWriteBackPlugin } from './deck-write-back-plugin'
 export type { ManifestConfig } from './mdx-manifest-plugin'
 export { mdxManifestPlugin } from './mdx-manifest-plugin'
 export { mdxRawPlugin } from './mdx-raw-plugin'

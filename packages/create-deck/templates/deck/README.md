@@ -9,7 +9,7 @@ npm install
 npm run dev
 ```
 
-Then open the printed local URL. Edit `src/deck.mdx` and the deck hot-reloads.
+Then open the printed local URL. Running `npm run dev` opens the deck in Present mode. Press **`e`** (or click the Edit button) to open the live MDX editor — edit slides, click template chips, then **Save** (or Cmd/Ctrl-S) to write changes back to `src/deck.mdx`. Production builds (`npm run build`) are present-only; the editor and write-back endpoint are excluded automatically.
 
 ## Scripts
 

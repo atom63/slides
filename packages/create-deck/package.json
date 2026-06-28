@@ -1,6 +1,6 @@
 {
   "name": "@atom63/create-deck",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "license": "MIT",
   "type": "module",
   "description": "Scaffold a standalone deck project powered by the @atom63/slides engine",

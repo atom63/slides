@@ -1,6 +1,7 @@
 import './index.css'
-import { DeckEditor } from '@atom63/slides/editor'
-import { StrictMode } from 'react'
+import '@atom63/slides/editor/styles'
+import { DeckSurface } from '@atom63/slides/editor'
+import { StrictMode, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 
 const SAMPLE = `---
@@ -56,10 +57,21 @@ import { CoverSlide, StatementSlide, StatBento, ClosingSlide } from "@atom63/sli
 />
 `
 
+function App() {
+  const [source, setSource] = useState(SAMPLE)
+  return (
+    <div style={{ height: '100vh', width: '100vw' }}>
+      <DeckSurface
+        source={source}
+        onChange={setSource}
+        onSave={(s) => console.log('save', s.length)}
+      />
+    </div>
+  )
+}
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <div style={{ height: '100vh', width: '100vw' }}>
-      <DeckEditor source={SAMPLE} />
-    </div>
+    <App />
   </StrictMode>
 )

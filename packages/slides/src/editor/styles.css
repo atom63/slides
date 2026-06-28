@@ -204,3 +204,62 @@
   opacity: 0.5;
   line-height: 1.4;
 }
+
+/* DeckSurface present-mode container. */
+.a63-surface {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Floating Edit button — top-right corner of present view. */
+.a63-surface__edit {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.6rem;
+  border: 1px solid rgba(127, 127, 127, 0.4);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.85);
+  color: #1a1a1a;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+}
+
+.a63-surface__edit:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(59, 130, 246, 0.6);
+}
+
+/* Toolbar actions group — flex row with consistent gap. */
+.a63-editor__toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* Save and Present buttons — same pill look as the theme toggle. */
+.a63-editor__save,
+.a63-editor__present {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.6rem;
+  border: 1px solid rgba(127, 127, 127, 0.4);
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.a63-editor__save:hover,
+.a63-editor__present:hover {
+  background: rgba(127, 127, 127, 0.12);
+}
