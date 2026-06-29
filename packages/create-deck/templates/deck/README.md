@@ -1,15 +1,25 @@
 # deck
 
-A standalone presentation deck powered by the [`@atom63/slides`](https://www.npmjs.com/package/@atom63/slides) engine — a host-agnostic MDX slide runtime with built-in layout templates, prose styling, reveal animations, and token theming.
+You just scaffolded a presentation deck powered by the [`@atom63/slides`](https://www.npmjs.com/package/@atom63/slides) engine — a host-agnostic MDX slide runtime with built-in layout templates, prose styling, reveal animations, and token theming.
 
-## Getting started
+A deck is a single `.mdx` file (`src/deck.mdx`): `---`-separated slides built from ~20 templates. The intended way to fill it: **describe your talk to a coding agent and let it write the MDX**, then steer the result in the browser. The MDX stays the source of truth.
+
+## 1. Fill it with your agent
+
+Point your coding agent (Claude Code, Cursor, …) at `src/deck.mdx` and the **[deck-authoring skill](https://github.com/atom63/slides/tree/main/skill)** — it packages the deck-file anatomy, the full template catalog (every prop + slot), and the Swiss-design voice. Describe your talk; the agent drafts the slides. You don't hand-write JSX.
+
+## 2. Run + steer
 
 ```bash
 npm install
 npm run dev
 ```
 
-Then open the printed local URL. Running `npm run dev` opens the deck in Present mode. Press **`e`** (or click the Edit button) to open the live MDX editor — edit slides, click template chips, then **Save** (or Cmd/Ctrl-S) to write changes back to `src/deck.mdx`. Production builds (`npm run build`) are present-only; the editor and write-back endpoint are excluded automatically.
+Open the printed local URL — `npm run dev` opens the deck in Present mode. Press **`e`** (or click the Edit button) to open the live MDX editor: edit any slide as a **Form**, switch its **template** via the chips, then **Save** (or Cmd/Ctrl-S) to write changes back to `src/deck.mdx`. This is how you nudge what the agent drafted. Production builds (`npm run build`) are present-only; the editor and write-back endpoint are excluded automatically.
+
+## 3. Theme + present
+
+Set a theme in one line (see [Theming](#theming) below), then present with keyboard nav and the grid overview.
 
 ## Scripts
 

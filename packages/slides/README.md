@@ -1,13 +1,33 @@
 # @atom63/slides
 
-A host-agnostic **MDX slide presentation engine** — write decks in MDX against an opinionated **template grammar**, and re-theme them with CSS custom-property **tokens**. The same engine powers the Slides app in [OS63](https://os.atom63.io) and runs standalone anywhere React + Vite + Tailwind v4 do.
+**Write presentations as MDX — and let a coding agent draft them.**
+
+A deck is a `.mdx` file: `---`-separated slides built from ~20 templates. Describe your talk to your coding agent; it writes the MDX. Then steer it in the browser — edit any slide as a form, switch its template, restyle with a one-line theme. The MDX stays the source of truth the whole way.
+
+The same host-agnostic engine powers the Slides app in [OS63](https://os.atom63.io) and runs standalone anywhere React + Vite + Tailwind v4 do.
+
+### The workflow
+
+1. **Scaffold** — `npm create @atom63/deck my-talk` lays down a standalone deck project.
+2. **Author with your agent** — point your coding agent at `src/deck.mdx` and the [deck-authoring skill](#author-with-a-coding-agent), describe the talk; it writes the MDX.
+3. **Steer in the browser** — `npm run dev`, then Edit mode: tune any slide as a Form, switch its template.
+4. **Theme in one line** — set `theme:` in frontmatter or pick one from the picker.
+5. **Present** — keyboard nav, grid overview, presenter PiP.
+
+Because a deck is just code, the parts machines are good at — layout, alignment, template choice — are an agent's job; the parts you care about — the argument, the words — stay yours.
 
 - **Templates, not div soup** — ~20 composable slide templates (`CoverSlide`, `StatBento`, `HeroBento`, `SplitHalf`, `QuoteSlide`, `FullBleedSlide`, …) plus low-level primitives.
 - **Token theming** — every surface reads `--theme-slide-*` (and base) custom properties; swap a token set to restyle a whole deck.
 - **Batteries-included player** — keyboard nav, grid overview, presenter PiP, mobile layout, optional source view and password gate.
-- **Introspectable** — a machine-readable `templateRegistry` describes every template's content slots (for tooling, editors, and agents).
+- **Introspectable** — a machine-readable `templateRegistry` describes every template's content slots, so coding agents, editors, and tooling know exactly what each slide accepts.
 
-> Status: `0.1.x`, extracted from a monorepo. The API may shift before `1.0`.
+> Status: `0.4.x`, extracted from a monorepo. The API may shift before `1.0`.
+
+## Author with a coding agent
+
+Step 2 of the workflow is the point of the whole toolchain: **you don't hand-write JSX, you describe the talk.** A deck is plain MDX — `---`-separated slides importing templates from `@atom63/slides` — which is exactly the shape a coding agent (Claude Code, Cursor, …) writes well.
+
+The **[deck-authoring skill](https://github.com/atom63/slides/tree/main/skill)** ([`skill/SKILL.md`](https://github.com/atom63/slides/tree/main/skill/SKILL.md)) packages everything the agent needs: the deck-file anatomy, the full template catalog with every prop and slot, the Swiss-design voice, and the anti-patterns to avoid. Point your agent at it (copy `SKILL.md` + `TEMPLATES.md` into your skills folder, or reference it directly), describe your talk, and it drafts `src/deck.mdx`. Then open the dev server and steer the result — every slide is editable as a Form, every template is swappable, every theme is one line.
 
 ## Install
 

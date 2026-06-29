@@ -1,0 +1,50 @@
+---
+title: "Presentations, written by an agent"
+date: "2026-06-28"
+description: "A worked example: you describe the talk, a coding agent writes the MDX."
+theme: terminal
+---
+
+import { CoverSlide, StatementSlide, StatBento, QuoteSlide, ClosingSlide } from '@atom63/slides'
+
+<CoverSlide
+  eyebrow="@atom63/slides"
+  title="Presentations, written by an agent"
+  subtitle="You describe the talk. A coding agent writes the MDX. You steer it in the browser."
+  credit="a worked example"
+/>
+
+---
+
+<StatementSlide
+  kicker="The idea"
+  title="A deck is just MDX — so an agent can write it."
+  subtitle="No drag-and-drop. Slides are code, and code is what agents are good at."
+/>
+
+---
+
+<StatBento label="What you get" title="One prompt, a real deck">
+  <StatBento.Body>
+    Scaffold, describe your talk, and the agent fills templated slides you can tweak.
+  </StatBento.Body>
+  <StatBento.Stat value="1" label="prompt to first draft" />
+  <StatBento.Stat value="~20" label="slide templates" />
+  <StatBento.Stat value="5" label="one-line themes" />
+</StatBento>
+
+---
+
+<QuoteSlide
+  quote="Write content as MDX, let the agent do the layout, nudge what you don't like."
+  attribution="the whole workflow"
+/>
+
+---
+
+<ClosingSlide
+  title="npm create @atom63/deck"
+  eyebrow="Try it"
+  website="github.com/atom63/slides"
+  email="hi@atom63.io"
+/>
