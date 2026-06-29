@@ -36,6 +36,7 @@ export function EditPane({
   themeValue,
 }: EditPaneProps) {
   const [rightTab, setRightTab] = useState<RightPaneTab>('source')
+  const [justSaved, setJustSaved] = useState(false)
   // TODO: sync with preview nav — currently uses a form-local stepper defaulting to slide 0.
   const [formSlideIdx, setFormSlideIdx] = useState(0)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
@@ -45,14 +46,21 @@ export function EditPane({
     (e: ChangeEvent<HTMLTextAreaElement>) => onChange(e.target.value),
     [onChange]
   )
+  // Save + flash a brief confirmation, so a successful save is visible (the
+  // write is otherwise silent).
+  const handleSave = useCallback(async () => {
+    await onSave?.(source)
+    setJustSaved(true)
+    window.setTimeout(() => setJustSaved(false), 1500)
+  }, [onSave, source])
   const handleKeyDown = useCallback(
     (e: KeyboardEvent<HTMLTextAreaElement>) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 's') {
         e.preventDefault()
-        onSave?.(source)
+        void handleSave()
       }
     },
-    [onSave, source]
+    [handleSave]
   )
   const insert = useCallback(
     (name: string) => {
@@ -141,8 +149,13 @@ export function EditPane({
             {/* ThemePicker: writes the deck token theme to frontmatter `theme:`. */}
             <ThemePicker source={source} theme={themeValue} onChange={onChange} />
             {onSave ? (
-              <button type="button" className="a63-editor__save" onClick={() => onSave(source)}>
-                Save
+              <button
+                type="button"
+                className="a63-editor__save"
+                onClick={handleSave}
+                data-saved={justSaved || undefined}
+              >
+                {justSaved ? 'Saved ✓' : 'Save'}
               </button>
             ) : null}
             <button type="button" className="a63-editor__present" onClick={onPresent}>
