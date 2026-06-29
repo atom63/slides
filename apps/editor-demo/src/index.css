@@ -1,8 +1,0 @@
-@import "tailwindcss";
-@import "@atom63/slides/theme-defaults";
-@import "@atom63/slides/styles";
-@import "@atom63/slides/editor/styles";
-
-/* A published consumer points @source at node_modules/@atom63/slides/dist. */
-@source "../../../packages/slides/dist/**/*.js";
-@source "./**/*.{ts,tsx}";

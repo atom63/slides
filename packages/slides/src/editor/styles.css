@@ -263,3 +263,221 @@
 .a63-editor__present:hover {
   background: rgba(127, 127, 127, 0.12);
 }
+
+/* ─── SlotForm — registry-driven prop editor ─────────────────────────────── */
+.a63-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.75rem;
+}
+
+.a63-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.a63-form__label-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.2rem;
+}
+
+.a63-form__label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  letter-spacing: 0.01em;
+}
+
+.a63-form__required {
+  color: #b91c1c;
+}
+
+.a63-form__input,
+.a63-form__textarea {
+  width: 100%;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid rgba(127, 127, 127, 0.35);
+  border-radius: 0.375rem;
+  background: #fff;
+  color: #1a1a1a;
+  font-size: 0.8rem;
+  font-family: inherit;
+  line-height: 1.4;
+  outline: none;
+  transition: border-color 0.12s ease;
+}
+
+.a63-form__input:focus,
+.a63-form__textarea:focus {
+  border-color: rgba(59, 130, 246, 0.7);
+}
+
+.a63-form__textarea {
+  resize: vertical;
+  min-height: 4.5rem;
+}
+
+.a63-form__slots-note {
+  margin-top: 0.25rem;
+  padding: 0.4rem 0.55rem;
+  border-radius: 0.375rem;
+  background: rgba(127, 127, 127, 0.08);
+  font-size: 0.72rem;
+  color: #555;
+  line-height: 1.4;
+}
+
+.a63-form__unknown {
+  padding: 0.75rem;
+  font-size: 0.8rem;
+  color: #b91c1c;
+}
+
+/* TemplatePicker — loss warning + dismiss button */
+.a63-form__picker-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-top: 0.35rem;
+  padding: 0.4rem 0.55rem;
+  border-radius: 0.375rem;
+  background: rgba(180, 83, 9, 0.1);
+  border: 1px solid rgba(180, 83, 9, 0.3);
+  font-size: 0.72rem;
+  color: #92400e;
+  line-height: 1.4;
+}
+
+.a63-form__picker-warning span {
+  flex: 1;
+  min-width: 0;
+}
+
+.a63-form__picker-dismiss {
+  flex: none;
+  background: transparent;
+  border: none;
+  padding: 0 0.25rem;
+  color: inherit;
+  font-size: 0.9rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.a63-form__picker-dismiss:hover {
+  opacity: 1;
+}
+
+/* ─── Source | Form sub-toggle ───────────────────────────────────────────── */
+.a63-editor__subtoggle {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(127, 127, 127, 0.4);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.a63-editor__subtoggle-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.55rem;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.1s ease;
+}
+
+.a63-editor__subtoggle-btn + .a63-editor__subtoggle-btn {
+  border-left: 1px solid rgba(127, 127, 127, 0.4);
+}
+
+.a63-editor__subtoggle-btn[aria-pressed='true'] {
+  background: rgba(59, 130, 246, 0.15);
+  color: #1d4ed8;
+}
+
+.a63-editor__subtoggle-btn:hover:not([aria-pressed='true']) {
+  background: rgba(127, 127, 127, 0.1);
+}
+
+/* ─── Form panel (right pane in Form mode) ───────────────────────────────── */
+.a63-editor__form-panel {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Slide stepper — prev/next nav inside the form panel */
+.a63-editor__slide-stepper {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.75rem;
+  border-bottom: 1px solid rgba(127, 127, 127, 0.18);
+  flex: none;
+}
+
+.a63-editor__stepper-label {
+  flex: 1;
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 600;
+  opacity: 0.7;
+}
+
+.a63-editor__stepper-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1px solid rgba(127, 127, 127, 0.4);
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.a63-editor__stepper-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.a63-editor__stepper-btn:not(:disabled):hover {
+  background: rgba(127, 127, 127, 0.1);
+}
+
+.a63-editor__form-fields {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.a63-editor__form-opaque {
+  padding: 1rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.a63-editor__form-opaque p {
+  font-size: 0.82rem;
+  color: #555;
+}
+
+.a63-editor__form-empty {
+  padding: 1rem 0.75rem;
+  font-size: 0.82rem;
+  color: #555;
+}

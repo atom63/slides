@@ -1,4 +1,5 @@
 import mdx from '@mdx-js/rollup'
+import { deckWriteBackPlugin, mdxRawPlugin } from '@atom63/slides/vite'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import remarkFrontmatter from 'remark-frontmatter'
@@ -8,6 +9,8 @@ import { defineConfig } from 'vite'
 
 export default defineConfig({
   plugins: [
+    mdxRawPlugin(),
+    deckWriteBackPlugin({ deckPath: 'src/deck.mdx' }),
     {
       enforce: 'pre',
       ...mdx({

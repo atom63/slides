@@ -78,6 +78,23 @@ test('keeps last good preview and shows error banner when source becomes invalid
   expect(screen.getByText('Hello')).toBeInTheDocument()
 })
 
+test('Form mode edits the current slide and updates source', async () => {
+  let src = `---\ntitle: T\n---\n\n<CoverSlide title="Hello" />\n`
+  const onChange = vi.fn((s: string) => { src = s })
+  render(<DeckSurface source={src} onChange={onChange} initialMode="edit" debounceMs={0} />)
+  fireEvent.click(await screen.findByRole('button', { name: /^form$/i }))
+  const title = await screen.findByLabelText('Title')
+  fireEvent.change(title, { target: { value: 'Bye' } })
+  expect(onChange).toHaveBeenCalled()
+  expect(src).toContain('title="Bye"')
+})
+
+test('opaque slide shows the Source-only notice in Form mode', async () => {
+  render(<DeckSurface source={`---\ntitle: T\n---\n\n## Just markdown\n`} onChange={() => {}} initialMode="edit" debounceMs={0} />)
+  fireEvent.click(await screen.findByRole('button', { name: /^form$/i }))
+  expect(await screen.findByText(/only editable in source/i)).toBeInTheDocument()
+})
+
 test('switching Present→Edit does not trigger a recompile (shared compile)', async () => {
   const spy = vi.spyOn(compileMod, 'compileDeck')
   const onChange = vi.fn()

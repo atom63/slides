@@ -1,17 +1,23 @@
-import { SlidesPlayer } from '@atom63/slides'
-import type { SlideDeckItem, SlideDeckMeta } from '@atom63/slides'
-import Deck, { frontmatter } from './deck.mdx'
+import { DeckSurface } from '@atom63/slides/editor'
+import '@atom63/slides/editor/styles'
+import { useState } from 'react'
+import deckRaw from './deck.mdx?raw'
 
-const deck: SlideDeckItem = {
-  slug: 'starter',
-  meta: frontmatter as unknown as SlideDeckMeta,
-  content: Deck,
+// Dev-only: persist edits to src/deck.mdx via the deckWriteBackPlugin endpoint.
+async function persist(next: string) {
+  await fetch('/__write-deck', { method: 'POST', body: next })
 }
 
 export function App() {
+  const [source, setSource] = useState(deckRaw)
+  const editable = import.meta.env.DEV // edit only in dev; production = present-only
   return (
     <div style={{ height: '100vh', width: '100vw' }}>
-      <SlidesPlayer deck={deck} onBack={() => {}} />
+      <DeckSurface
+        source={source}
+        onChange={editable ? setSource : undefined}
+        onSave={editable ? persist : undefined}
+      />
     </div>
   )
 }
