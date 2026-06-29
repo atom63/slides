@@ -114,18 +114,19 @@ export function DeckSurface({
   }, [editable, mode])
 
   if (editable && mode === 'edit') {
+    // EditPane applies `data-slides-theme` to its real `.a63-editor` box (via
+    // themeValue) so the deck theme cascades to the slide — no display:contents
+    // wrapper, which was breaking custom-property inheritance to the preview.
     return (
-      <div className="a63-surface-edit" data-slides-theme={theme}>
-        <EditPane
-          source={source}
-          onChange={setSource}
-          onSave={onSave}
-          deck={deck}
-          error={error}
-          onPresent={() => setMode('present')}
-          themeValue={theme}
-        />
-      </div>
+      <EditPane
+        source={source}
+        onChange={setSource}
+        onSave={onSave}
+        deck={deck}
+        error={error}
+        onPresent={() => setMode('present')}
+        themeValue={theme}
+      />
     )
   }
 

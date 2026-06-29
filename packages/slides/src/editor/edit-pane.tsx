@@ -35,7 +35,6 @@ export function EditPane({
   onPresent,
   themeValue,
 }: EditPaneProps) {
-  const [theme, setTheme] = useState<'light' | 'dark'>('light')
   const [rightTab, setRightTab] = useState<RightPaneTab>('source')
   // TODO: sync with preview nav — currently uses a form-local stepper defaulting to slide 0.
   const [formSlideIdx, setFormSlideIdx] = useState(0)
@@ -96,8 +95,10 @@ export function EditPane({
   )
 
   return (
-    <div className="a63-editor">
-      <section className="a63-editor__preview" data-theme={theme}>
+    // data-slides-theme on the real grid box (NOT a display:contents wrapper) so
+    // the deck theme's custom properties reliably cascade to the slide preview.
+    <div className="a63-editor" data-slides-theme={themeValue || undefined}>
+      <section className="a63-editor__preview">
         {error ? (
           <div className="a63-editor__error" role="alert">
             <span className="a63-editor__error-tag">MDX error</span>
@@ -105,7 +106,7 @@ export function EditPane({
           </div>
         ) : null}
         {deck ? (
-          <div className="a63-editor__preview-stage" key={theme}>
+          <div className="a63-editor__preview-stage">
             <SlidesPlayer deck={deck} onBack={() => {}} />
           </div>
         ) : (
@@ -137,22 +138,13 @@ export function EditPane({
                 Form
               </button>
             </div>
-            {/* ThemePicker: writes deck token theme to frontmatter `theme:`.
-                Distinct from the Light/Dark toggle below (preview-canvas background only). */}
+            {/* ThemePicker: writes the deck token theme to frontmatter `theme:`. */}
             <ThemePicker source={source} theme={themeValue} onChange={onChange} />
             {onSave ? (
               <button type="button" className="a63-editor__save" onClick={() => onSave(source)}>
                 Save
               </button>
             ) : null}
-            <button
-              type="button"
-              className="a63-editor__theme-toggle"
-              onClick={() => setTheme(t => (t === 'light' ? 'dark' : 'light'))}
-              aria-pressed={theme === 'dark'}
-            >
-              {theme === 'light' ? '☀︎ Light' : '☾ Dark'}
-            </button>
             <button type="button" className="a63-editor__present" onClick={onPresent}>
               Present
             </button>
