@@ -49,6 +49,10 @@ import { CoverSlide } from '@atom63/slides'
 - so does `inline code`
 ```
 
+## Theming
+
+Set a deck theme in frontmatter (`theme: terminal`, or `dark` / `editorial` / `neon` / `bold`) or pick one live via the in-app Edit → Theme picker.
+
 ## Learn more
 
 - `@atom63/slides` on npm: <https://www.npmjs.com/package/@atom63/slides>

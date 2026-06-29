@@ -1,4 +1,5 @@
 import { type ComponentType, useEffect, useMemo, useState } from 'react'
+import { resolveTheme } from '../content/themes'
 import { SlidesPlayer } from '../player/slides-player'
 import type { SlideDeckItem } from '../types'
 import { compileDeck } from './compile-deck'
@@ -98,6 +99,8 @@ export function DeckSurface({
     [preview]
   )
 
+  const theme = resolveTheme(deck?.meta as { theme?: unknown } | undefined)
+
   // Keyboard shortcuts (only when editable).
   useEffect(() => {
     if (!editable) return
@@ -112,19 +115,22 @@ export function DeckSurface({
 
   if (editable && mode === 'edit') {
     return (
-      <EditPane
-        source={source}
-        onChange={setSource}
-        onSave={onSave}
-        deck={deck}
-        error={error}
-        onPresent={() => setMode('present')}
-      />
+      <div className="a63-surface-edit" data-slides-theme={theme}>
+        <EditPane
+          source={source}
+          onChange={setSource}
+          onSave={onSave}
+          deck={deck}
+          error={error}
+          onPresent={() => setMode('present')}
+          themeValue={theme}
+        />
+      </div>
     )
   }
 
   return (
-    <div className="a63-surface">
+    <div className="a63-surface" data-slides-theme={theme}>
       {editable && (
         <button type="button" className="a63-surface__edit" onClick={() => setMode('edit')}>
           Edit

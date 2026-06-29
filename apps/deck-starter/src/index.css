@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "@atom63/slides/theme-defaults";
+@import "@atom63/slides/themes";          /* runtime presets for the GUI theme picker (data-slides-theme) */
 @import "@atom63/slides/styles";
 
 /* Scan the engine's built classes so Tailwind generates them (a published

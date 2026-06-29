@@ -106,3 +106,25 @@ test('switching Present→Edit does not trigger a recompile (shared compile)', a
   expect(spy.mock.calls.length).toBe(callsAfterCompile) // mode switch alone caused no new compile
   spy.mockRestore()
 })
+
+test('applies meta.theme as data-slides-theme on the deck stage', async () => {
+  const src = `---\ntitle: T\ntheme: terminal\n---\n\n<CoverSlide title="Hi" />\n`
+  const { container } = render(<DeckSurface source={src} debounceMs={0} />)
+  await waitFor(() =>
+    expect(container.querySelector('[data-slides-theme="terminal"]')).toBeTruthy()
+  )
+})
+
+test('no theme → no data-slides-theme attribute', async () => {
+  const src = `---\ntitle: T\n---\n\n<CoverSlide title="Hi" />\n`
+  const { container } = render(<DeckSurface source={src} debounceMs={0} />)
+  await waitFor(() => expect(screen.getByText('Hi')).toBeInTheDocument())
+  expect(container.querySelector('[data-slides-theme]')).toBeNull()
+})
+
+test('unknown theme is ignored (no attribute)', async () => {
+  const src = `---\ntitle: T\ntheme: notathing\n---\n\n<CoverSlide title="Hi" />\n`
+  const { container } = render(<DeckSurface source={src} debounceMs={0} />)
+  await waitFor(() => expect(screen.getByText('Hi')).toBeInTheDocument())
+  expect(container.querySelector('[data-slides-theme]')).toBeNull()
+})

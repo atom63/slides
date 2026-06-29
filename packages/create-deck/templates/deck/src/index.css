@@ -1,7 +1,10 @@
 @import "tailwindcss";
 @import "@atom63/slides/theme-defaults";
+@import "@atom63/slides/themes";          /* runtime presets — enables the in-app theme picker + `theme:` frontmatter */
 @import "@atom63/slides/styles";
-/* For a dark deck, also: @import "@atom63/slides/themes/dark"; */
+/* The line above loads all presets, switched at runtime via the Edit → Theme
+   picker (writes `theme:` to frontmatter). For a static build-time hard-swap
+   instead, drop it and add e.g. @import "@atom63/slides/themes/dark"; */
 
 /* Scan the engine's built classes so Tailwind generates the utilities the
    @atom63/slides templates rely on. */

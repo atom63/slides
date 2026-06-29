@@ -212,6 +212,11 @@
   height: 100%;
 }
 
+/* DeckSurface edit-mode wrapper — pass-through so it doesn't affect layout. */
+.a63-surface-edit {
+  display: contents;
+}
+
 /* Floating Edit button — top-right corner of present view. */
 .a63-surface__edit {
   position: absolute;
@@ -480,4 +485,40 @@
   padding: 1rem 0.75rem;
   font-size: 0.82rem;
   color: #555;
+}
+
+/* ─── ThemePicker — deck token theme select ──────────────────────────────── */
+/* Controls `theme:` frontmatter (deck visual theme). Distinct from the
+   Light/Dark preview-canvas toggle which only affects the editor background. */
+.a63-editor__theme-picker-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.a63-editor__theme-picker-text {
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.a63-editor__theme-select {
+  padding: 0.2rem 0.4rem;
+  border: 1px solid rgba(127, 127, 127, 0.4);
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font-size: 0.72rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  outline: none;
+}
+
+.a63-editor__theme-select:hover {
+  background: rgba(127, 127, 127, 0.12);
+}
+
+.a63-editor__theme-select:focus-visible {
+  outline: 2px solid rgba(59, 130, 246, 0.7);
+  outline-offset: 1px;
 }

@@ -1,6 +1,6 @@
 {
   "name": "@atom63/slides",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -72,6 +72,9 @@
     },
     "./themes/bold": {
       "default": "./src/styles/themes/bold.css"
+    },
+    "./themes": {
+      "default": "./src/styles/themes.css"
     }
   },
   "sideEffects": [
@@ -87,10 +90,11 @@
     "src/styles/themes/neon.css",
     "src/styles/themes/bold.css",
     "src/editor/styles.css",
-    "src/editor/styles.d.ts"
+    "src/editor/styles.d.ts",
+    "src/styles/themes.css"
   ],
   "scripts": {
-    "build": "tsup",
+    "build": "node scripts/gen-theme-bundle.mjs && tsup",
     "dev": "tsup --watch",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",

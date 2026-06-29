@@ -7,6 +7,7 @@ import { getSlideBlock, setSlideProp, slideBlockIndices, switchSlideTemplate } f
 import { SlotForm } from './slot-form'
 import { TemplatePicker } from './template-picker'
 import { templateSnippets } from './template-snippets'
+import { ThemePicker } from './theme-picker'
 
 export interface EditPaneProps {
   source: string
@@ -15,11 +16,25 @@ export interface EditPaneProps {
   deck: SlideDeckItem | null
   error: string | null
   onPresent: () => void
+  /**
+   * The validated deck token theme (dark/terminal/editorial/neon/bold) from
+   * frontmatter. ThemePicker (deck theme) is distinct from the Light/Dark
+   * preview-canvas toggle (editor background only).
+   */
+  themeValue?: string
 }
 
 type RightPaneTab = 'source' | 'form'
 
-export function EditPane({ source, onChange, onSave, deck, error, onPresent }: EditPaneProps) {
+export function EditPane({
+  source,
+  onChange,
+  onSave,
+  deck,
+  error,
+  onPresent,
+  themeValue,
+}: EditPaneProps) {
   const [theme, setTheme] = useState<'light' | 'dark'>('light')
   const [rightTab, setRightTab] = useState<RightPaneTab>('source')
   // TODO: sync with preview nav — currently uses a form-local stepper defaulting to slide 0.
@@ -122,6 +137,9 @@ export function EditPane({ source, onChange, onSave, deck, error, onPresent }: E
                 Form
               </button>
             </div>
+            {/* ThemePicker: writes deck token theme to frontmatter `theme:`.
+                Distinct from the Light/Dark toggle below (preview-canvas background only). */}
+            <ThemePicker source={source} theme={themeValue} onChange={onChange} />
             {onSave ? (
               <button type="button" className="a63-editor__save" onClick={() => onSave(source)}>
                 Save

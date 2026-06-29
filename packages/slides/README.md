@@ -166,6 +166,40 @@ Key tokens: **base palette** — `--background`, `--foreground`, `--card`, `--mu
 
 > Runtime light/dark toggle: import `themes/dark` is a hard swap. For a toggle, copy `dark.css` and re-scope its `:root` to e.g. `[data-slides-theme="dark"]`, then set that attribute on a wrapper.
 
+### GUI theme picker and `theme:` frontmatter
+
+The `DeckEditor` / `DeckSurface` editor chrome includes a **Theme picker** (Edit → Theme). Selecting a theme writes a `theme:` line into the deck frontmatter; selecting "Default" removes it. The field accepts any of the five built-in names:
+
+```mdx
+---
+title: "My Talk"
+theme: terminal
+---
+```
+
+Load the runtime presets once, with a CSS **`@import`** in your Tailwind entry (the same place you import `theme-defaults` and `styles` — a JS import will **not** deliver it):
+
+```css
+@import "tailwindcss";
+@import "@atom63/slides/theme-defaults";
+@import "@atom63/slides/themes";          /* all presets, switched at runtime */
+@import "@atom63/slides/styles";
+```
+
+`DeckSurface` then reads `meta.theme` at runtime and sets `data-slides-theme="<name>"` on the surface wrapper, so the matching `[data-slides-theme]` rule activates — **no build step required**; the deck restyles live as you pick themes in the editor.
+
+**Present-only consumer path** — if you embed a bare `<SlidesPlayer>` without `DeckSurface`, keep the same `@import "@atom63/slides/themes"` above and set the attribute on a wrapper around the player yourself:
+
+```tsx
+import { resolveTheme } from "@atom63/slides"
+
+<div data-slides-theme={resolveTheme(deck.meta)}>
+  <SlidesPlayer deck={deck} onBack={onBack} />
+</div>
+```
+
+The per-theme `:root` imports (`@atom63/slides/themes/dark`, etc.) remain available for a static **build-time hard-swap** where you want a single theme locked in at compile time, without the runtime bundle.
+
 ## Authoring
 
 See the reference deck for the full template catalog and slot APIs, and inspect templates programmatically:
