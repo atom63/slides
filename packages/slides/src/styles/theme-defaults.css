@@ -204,6 +204,37 @@
 }
 
 /* -----------------------------------------------------------------------------
+   Runtime-theme re-derivation. A runtime theme (the GUI picker / `theme:`
+   frontmatter) overrides the PALETTE on a [data-slides-theme] element. But
+   CSS substitutes var() inside a custom-property declaration AT the element
+   where it's declared — so the palette-derived slide tokens above (declared on
+   :root) keep their :root/light values and IGNORE a runtime palette override.
+   The visible symptom: the slide canvas (--theme-slide-bg) stays light on a
+   dark theme. Re-declare the palette-derived slide tokens here, ON the themed
+   element itself, so they re-derive from the overridden palette. Built-in theme
+   files may still override any of these explicitly — imported after this, they
+   win by source order.
+   ----------------------------------------------------------------------------- */
+[data-slides-theme] {
+  --theme-slide-bg: var(--background);
+  --theme-slide-stage-bg: color-mix(in oklch, var(--muted) 70%, var(--border) 30%);
+  --theme-slide-toolbar-bg: color-mix(in oklch, var(--muted) 38%, transparent);
+  --theme-slide-toolbar-border: color-mix(in oklch, var(--border) 64%, transparent);
+  --theme-slide-statusbar-bg: color-mix(in oklch, var(--muted) 20%, transparent);
+  --theme-slide-statusbar-border: color-mix(in oklch, var(--border) 50%, transparent);
+  --theme-slide-sidebar-bg: color-mix(in oklch, var(--muted) 30%, transparent);
+  --theme-slide-sidebar-border: color-mix(in oklch, var(--border) 50%, transparent);
+  --theme-slide-surface: var(--card);
+  --theme-slide-rule-color: color-mix(in oklch, var(--foreground) 25%, transparent);
+  --theme-slide-accent: var(--primary);
+  --theme-slide-accent-foreground: var(--primary-foreground);
+  --theme-slide-muted: var(--muted-foreground);
+  --theme-slide-code-bg: var(--card);
+  --theme-slide-code-border: color-mix(in oklch, var(--foreground) 10%, transparent);
+  --theme-slide-quote-color: color-mix(in oklch, var(--foreground) 90%, transparent);
+}
+
+/* -----------------------------------------------------------------------------
    Default border color. Tailwind v4 leaves `border` utilities at `currentColor`
    (which renders as the text color — near-black). The full ATOM63 design system
    sets a global `--border` default; standalone consumers don't have that, so the

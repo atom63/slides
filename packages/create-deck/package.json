@@ -1,6 +1,6 @@
 {
   "name": "@atom63/create-deck",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "license": "MIT",
   "type": "module",
   "description": "Scaffold a standalone @atom63/slides deck — step 1 of the agent workflow: create the project your coding agent then writes as MDX.",
