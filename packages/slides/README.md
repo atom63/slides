@@ -2,19 +2,18 @@
 
 **Write presentations as MDX — and let a coding agent draft them.**
 
-A deck is a `.mdx` file: `---`-separated slides built from ~20 templates. Describe your talk to your coding agent; it writes the MDX. Then steer it in the browser — edit any slide as a form, switch its template, restyle with a one-line theme. The MDX stays the source of truth the whole way.
+A deck is a `.mdx` file: `---`-separated slides built from ~20 templates. Describe your talk to your coding agent; it writes the MDX — content, layout, and template choice. You restyle the whole deck with a one-line `theme:`, then present. The MDX stays the source of truth the whole way.
 
 The same host-agnostic engine powers the Slides app in [OS63](https://os.atom63.io) and runs standalone anywhere React + Vite + Tailwind v4 do.
 
 ### The workflow
 
 1. **Scaffold** — `npm create @atom63/deck my-talk` lays down a standalone deck project.
-2. **Author with your agent** — point your coding agent at `src/deck.mdx` and the [deck-authoring skill](#author-with-a-coding-agent), describe the talk; it writes the MDX.
-3. **Steer in the browser** — `npm run dev`, then Edit mode: tune any slide as a Form, switch its template.
-4. **Theme in one line** — set `theme:` in frontmatter or pick one from the picker.
-5. **Present** — keyboard nav, grid overview, presenter PiP.
+2. **Author with your agent** — point your coding agent at `src/deck.mdx` and the [deck-authoring skill](#author-with-a-coding-agent), describe the talk; it writes the MDX — content, layout, and template choice.
+3. **Theme in one line** — set `theme:` in frontmatter to restyle the whole deck.
+4. **Present** — `npm run dev`, then keyboard nav, grid overview, presenter PiP.
 
-Because a deck is just code, the parts machines are good at — layout, alignment, template choice — are an agent's job; the parts you care about — the argument, the words — stay yours.
+Because a deck is just code, the parts machines are good at — layout, alignment, template choice — are an agent's job; the parts you care about — the argument, the words — stay yours. An optional [browser editor](#atom63slideseditor--optional-live-deck-editor) lets you nudge a slide by hand, but it's not the main path.
 
 - **Templates, not div soup** — ~20 composable slide templates (`CoverSlide`, `StatBento`, `HeroBento`, `SplitHalf`, `QuoteSlide`, `FullBleedSlide`, …) plus low-level primitives.
 - **Token theming** — every surface reads `--theme-slide-*` (and base) custom properties; swap a token set to restyle a whole deck.
@@ -27,7 +26,7 @@ Because a deck is just code, the parts machines are good at — layout, alignmen
 
 Step 2 of the workflow is the point of the whole toolchain: **you don't hand-write JSX, you describe the talk.** A deck is plain MDX — `---`-separated slides importing templates from `@atom63/slides` — which is exactly the shape a coding agent (Claude Code, Cursor, …) writes well.
 
-The **[deck-authoring skill](https://github.com/atom63/slides/tree/main/skill)** ([`skill/SKILL.md`](https://github.com/atom63/slides/tree/main/skill/SKILL.md)) packages everything the agent needs: the deck-file anatomy, the full template catalog with every prop and slot, the Swiss-design voice, and the anti-patterns to avoid. Point your agent at it (copy `SKILL.md` + `TEMPLATES.md` into your skills folder, or reference it directly), describe your talk, and it drafts `src/deck.mdx`. Then open the dev server and steer the result — every slide is editable as a Form, every template is swappable, every theme is one line.
+The **[deck-authoring skill](https://github.com/atom63/slides/tree/main/skill)** ([`skill/SKILL.md`](https://github.com/atom63/slides/tree/main/skill/SKILL.md)) packages everything the agent needs: the deck-file anatomy, the full template catalog with every prop and slot, the Swiss-design voice, and the anti-patterns to avoid. Point your agent at it (copy `SKILL.md` + `TEMPLATES.md` into your skills folder, or reference it directly), describe your talk, and it drafts `src/deck.mdx`. Then open the dev server, set `theme:` to taste, and present — the MDX stays the source of truth. (An [optional browser editor](#atom63slideseditor--optional-live-deck-editor) is there for hand-nudging a slide, but it's not the main path.)
 
 ## Install
 
@@ -186,9 +185,9 @@ Key tokens: **base palette** — `--background`, `--foreground`, `--card`, `--mu
 
 > Runtime light/dark toggle: import `themes/dark` is a hard swap. For a toggle, copy `dark.css` and re-scope its `:root` to e.g. `[data-slides-theme="dark"]`, then set that attribute on a wrapper.
 
-### GUI theme picker and `theme:` frontmatter
+### `theme:` frontmatter and runtime presets
 
-The `DeckEditor` / `DeckSurface` editor chrome includes a **Theme picker** (Edit → Theme). Selecting a theme writes a `theme:` line into the deck frontmatter; selecting "Default" removes it. The field accepts any of the five built-in names:
+Set `theme:` in frontmatter to any of the five built-in names and the deck restyles at runtime — your agent writes this line, or you change it by hand:
 
 ```mdx
 ---
@@ -206,7 +205,7 @@ Load the runtime presets once, with a CSS **`@import`** in your Tailwind entry (
 @import "@atom63/slides/styles";
 ```
 
-`DeckSurface` then reads `meta.theme` at runtime and sets `data-slides-theme="<name>"` on the surface wrapper, so the matching `[data-slides-theme]` rule activates — **no build step required**; the deck restyles live as you pick themes in the editor.
+`DeckSurface` then reads `meta.theme` at runtime and sets `data-slides-theme="<name>"` on the surface wrapper, so the matching `[data-slides-theme]` rule activates — **no build step required**; the deck restyles live as the `theme:` line changes.
 
 **Present-only consumer path** — if you embed a bare `<SlidesPlayer>` without `DeckSurface`, keep the same `@import "@atom63/slides/themes"` above and set the attribute on a wrapper around the player yourself:
 
@@ -248,9 +247,11 @@ export default defineConfig({
 })
 ```
 
-### `@atom63/slides/editor` — live deck editor
+### `@atom63/slides/editor` — optional live deck editor
 
-A GUI deck editor with a live, runtime-compiled preview (no bundler in the loop), a registry-driven template palette, and a light/dark preview toggle. Import its chrome stylesheet as a side effect.
+> **Optional / experimental.** The main path is agent-authored MDX (see [Author with a coding agent](#author-with-a-coding-agent)); this GUI is a hand-steering escape hatch, not a required part of the workflow, and its API is the least stable in the package.
+
+A GUI deck editor with a live, runtime-compiled preview (no bundler in the loop) and a registry-driven template palette. Import its chrome stylesheet as a side effect.
 
 ```tsx
 import { DeckEditor } from '@atom63/slides/editor'

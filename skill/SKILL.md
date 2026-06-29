@@ -5,7 +5,7 @@ description: Authors and reviews MDX presentation decks built with the standalon
 
 # Deck Authoring with @atom63/slides
 
-**You are the coding agent in the @atom63/slides workflow.** The toolchain's pitch is *write presentations as MDX, and let a coding agent draft them* — your job is to be that agent: take the user's description of a talk and write the deck as MDX. The user then steers your draft in the browser (editing slides as forms, switching templates, theming in one line), but the MDX you write stays the source of truth.
+**You are the coding agent in the @atom63/slides workflow.** The toolchain's pitch is *write presentations as MDX, and let a coding agent draft them* — your job is to be that agent: take the user's description of a talk and write the deck as MDX. The user then sets a one-line `theme:` and presents — so design, layout, and template choice are yours to get right. The MDX you write stays the source of truth. (An optional in-app editor lets them hand-nudge a slide, but it's not the main path.)
 
 `@atom63/slides` is a host-agnostic MDX presentation engine: an opinionated template grammar plus token theming for building decks in MDX. Each slide renders onto a fixed **1920×1080** canvas, scaled to fit. The look is **Swiss / International Typographic Style**: hard edges, hairline rules as structure, flush-left type, a single signal color used as a solid block (not a tint), tabular numerals, and a four-glyph shape vocabulary (`▲ ■ ◆ ▼`).
 

@@ -1,23 +1,20 @@
-import { DeckSurface } from '@atom63/slides/editor'
-import '@atom63/slides/editor/styles'
-import { useState } from 'react'
-import deckRaw from './deck.mdx?raw'
+import { resolveTheme, SlidesPlayer } from '@atom63/slides'
+import type { SlideDeckItem, SlideDeckMeta } from '@atom63/slides'
+import Deck, { frontmatter } from './deck.mdx'
 
-// Dev-only: persist edits to src/deck.mdx via the deckWriteBackPlugin endpoint.
-async function persist(next: string) {
-  await fetch('/__write-deck', { method: 'POST', body: next })
+const deck: SlideDeckItem = {
+  slug: 'deck',
+  meta: frontmatter as unknown as SlideDeckMeta,
+  content: Deck,
 }
 
+// Present-first: the deck boots straight into the player. The `theme:` line in
+// deck.mdx frontmatter drives the look. Want to hand-nudge a slide in a GUI?
+// See "Optional: in-app editor" in the README to swap in <DeckSurface>.
 export function App() {
-  const [source, setSource] = useState(deckRaw)
-  const editable = import.meta.env.DEV // edit only in dev; production = present-only
   return (
-    <div style={{ height: '100vh', width: '100vw' }}>
-      <DeckSurface
-        source={source}
-        onChange={editable ? setSource : undefined}
-        onSave={editable ? persist : undefined}
-      />
+    <div data-slides-theme={resolveTheme(deck.meta)} style={{ height: '100vh', width: '100vw' }}>
+      <SlidesPlayer deck={deck} onBack={() => {}} />
     </div>
   )
 }

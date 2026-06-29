@@ -1,6 +1,6 @@
 {
   "name": "@atom63/slides",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -12,7 +12,7 @@
   },
   "homepage": "https://github.com/atom63/slides/tree/main/packages/slides#readme",
   "type": "module",
-  "description": "Write presentations as MDX — a template grammar + token theming designed for coding agents to author decks, with a browser GUI to steer them.",
+  "description": "Write presentations as MDX — a template grammar + token theming designed for coding agents to author decks.",
   "keywords": [
     "slides",
     "presentation",

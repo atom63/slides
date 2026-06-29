@@ -2,24 +2,24 @@
 
 You just scaffolded a presentation deck powered by the [`@atom63/slides`](https://www.npmjs.com/package/@atom63/slides) engine — a host-agnostic MDX slide runtime with built-in layout templates, prose styling, reveal animations, and token theming.
 
-A deck is a single `.mdx` file (`src/deck.mdx`): `---`-separated slides built from ~20 templates. The intended way to fill it: **describe your talk to a coding agent and let it write the MDX**, then steer the result in the browser. The MDX stays the source of truth.
+A deck is a single `.mdx` file (`src/deck.mdx`): `---`-separated slides built from ~20 templates. The intended way to fill it: **describe your talk to a coding agent and let it write the MDX**, set a one-line theme, and present. The MDX stays the source of truth.
 
 ## 1. Fill it with your agent
 
 Point your coding agent (Claude Code, Cursor, …) at `src/deck.mdx` and the **[deck-authoring skill](https://github.com/atom63/slides/tree/main/skill)** — it packages the deck-file anatomy, the full template catalog (every prop + slot), and the Swiss-design voice. Describe your talk; the agent drafts the slides. You don't hand-write JSX.
 
-## 2. Run + steer
+## 2. Run + present
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open the printed local URL — `npm run dev` opens the deck in Present mode. Press **`e`** (or click the Edit button) to open the live MDX editor: edit any slide as a **Form**, switch its **template** via the chips, then **Save** (or Cmd/Ctrl-S) to write changes back to `src/deck.mdx`. This is how you nudge what the agent drafted. Production builds (`npm run build`) are present-only; the editor and write-back endpoint are excluded automatically.
+Open the printed local URL — the deck boots straight into **Present mode**: keyboard navigation, grid overview, and presenter PiP. `npm run build` produces a present-only static bundle. Want to hand-nudge a slide in a GUI? See [Optional: in-app editor](#optional-in-app-editor).
 
-## 3. Theme + present
+## 3. Theme it
 
-Set a theme in one line (see [Theming](#theming) below), then present with keyboard nav and the grid overview.
+Set the look in one line — add a `theme:` to the deck frontmatter (see [Theming](#theming) below). That's the whole steering surface most decks need.
 
 ## Scripts
 
@@ -61,7 +61,52 @@ import { CoverSlide } from '@atom63/slides'
 
 ## Theming
 
-Set a deck theme in frontmatter (`theme: terminal`, or `dark` / `editorial` / `neon` / `bold`) or pick one live via the in-app Edit → Theme picker.
+Set a deck theme in frontmatter (`theme: terminal`, or `dark` / `editorial` / `neon` / `bold`); the deck restyles at runtime. The [optional in-app editor](#optional-in-app-editor) also exposes a live theme picker.
+
+## Optional: in-app editor
+
+The main path is agent-authored MDX — the player is all most decks need. If you want a GUI to hand-nudge a slide (edit it as a form, switch its template, pick a theme live), opt into the editor. It's dev-only and excluded from production builds, and adds no new dependencies (it ships inside `@atom63/slides`).
+
+**1. Enable the editor's Vite plugins** in `vite.config.ts` — add them to the top of `plugins: [ ]`:
+
+```ts
+import { deckWriteBackPlugin, mdxRawPlugin } from '@atom63/slides/vite'
+
+// plugins: [
+//   mdxRawPlugin(),
+//   deckWriteBackPlugin({ deckPath: 'src/deck.mdx' }),
+//   ...keep mdx(), react(), tailwindcss()
+// ]
+```
+
+**2. Swap the app shell** in `src/app.tsx`:
+
+```tsx
+import { DeckSurface } from '@atom63/slides/editor'
+import '@atom63/slides/editor/styles'
+import { useState } from 'react'
+import deckRaw from './deck.mdx?raw'
+
+async function persist(next: string) {
+  await fetch('/__write-deck', { method: 'POST', body: next }) // dev-only endpoint
+}
+
+export function App() {
+  const [source, setSource] = useState(deckRaw)
+  const editable = import.meta.env.DEV // edit only in dev; production = present-only
+  return (
+    <div style={{ height: '100vh', width: '100vw' }}>
+      <DeckSurface
+        source={source}
+        onChange={editable ? setSource : undefined}
+        onSave={editable ? persist : undefined}
+      />
+    </div>
+  )
+}
+```
+
+Now `npm run dev` shows an Edit button: edit any slide as a **Form**, switch its **template**, then **Save** (Cmd/Ctrl-S) to write changes back to `src/deck.mdx`. Production builds stay present-only.
 
 ## Learn more
 

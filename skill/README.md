@@ -2,7 +2,7 @@
 
 **This is the skill that lets a coding agent author [`@atom63/slides`](../packages/slides) decks.** It's the centerpiece of the toolchain's pitch — *write presentations as MDX, and let a coding agent draft them.* The skill teaches an agent everything it needs to write Swiss-design decks in MDX: the deck-file anatomy, the full template catalog, the design voice, and the anti-patterns to avoid.
 
-**Install it / point your agent at it.** For agent runtimes that load skills from a directory (Claude Code, Cursor, …), copy this folder's `SKILL.md` and the sibling `TEMPLATES.md` it references into your skills folder. Or reference `SKILL.md` directly. Then describe your talk; the agent drafts `src/deck.mdx`. This is **step 2** of the workflow: (1) scaffold with `@atom63/create-deck` → **(2) point your agent here, describe the talk → it writes the MDX** → (3) `npm run dev`, steer in Edit mode → (4) pick a theme → (5) present.
+**Install it / point your agent at it.** For agent runtimes that load skills from a directory (Claude Code, Cursor, …), copy this folder's `SKILL.md` and the sibling `TEMPLATES.md` it references into your skills folder. Or reference `SKILL.md` directly. Then describe your talk; the agent drafts `src/deck.mdx`. This is **step 2** of the workflow: (1) scaffold with `@atom63/create-deck` → **(2) point your agent here, describe the talk → it writes the MDX** → (3) set a one-line `theme:` → (4) `npm run dev`, present. (An optional in-app editor can hand-nudge a slide, but it's not the main path.)
 
 > This is **not** an npm package. It lives as a top-level `skill/` folder (a private pnpm workspace member only so `scripts/gen-templates.mjs` can resolve `@atom63/slides`). Consume it as docs / a skills-folder source, not via `npm install`.
 
